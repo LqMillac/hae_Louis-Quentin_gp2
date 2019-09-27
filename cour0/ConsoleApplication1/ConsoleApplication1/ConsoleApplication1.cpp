@@ -2,11 +2,48 @@
 //
 
 #include "pch.h"
-#include <iostream>
-
+//#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+int appel(int s) {
+	s++;
+	return 0;
+}
+Vec3 incrX(Vec3 _in) {
+	_in.x++;
+	return _in;
+};
 int main()
+
 {
-    std::cout << "Hello World!\n"; 
+	int x = 66;
+	appel(x);
+	printf("xval:%d\n", x);
+	// 68 ?
+	Vec3 toto = { 1,2,3 };// new vec3()
+	toto =incrX(toto);
+	printf("xval:%f\n", toto.x);
+	
+
+
+
+
+
+   // std::cout << "Hello World!\n"; 
+	/*
+	int goo = 0;
+	const char * label = "sapin";
+	const char label2[6] = { 's','a','p','i','n',0 };
+	float v = 0.5f;
+	double ff = 0.5;
+	//printf("Hello world this is a test : %d label :%s %f\n",goo,label,66.66f);
+
+	//printf("Hello world this is a test : a fraction %f\n", ((float)1.0f/3.0f));
+	//printf("Hello world :l2 %s\n", label2);
+	//const char labelbug[5] = { 's','a','p','i','n' };
+	*/
+
+	
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
