@@ -73,7 +73,7 @@ int main()
 
 	auto start = std::chrono::system_clock::now();
 
-	int * bigBlock = (int*) malloc(1024 * 1024 * 1024);
+	int * bigBlock = (int*) malloc(1024*1024 * 1024 * 1024);
 
 	for (int k = 0; k < 64 * 1024 * 1024; ++k)
 	{

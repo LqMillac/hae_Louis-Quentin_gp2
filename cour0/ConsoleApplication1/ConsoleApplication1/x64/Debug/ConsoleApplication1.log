@@ -1,5 +1,6 @@
 ﻿  ConsoleApplication1.cpp
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour0\consoleapplication1\consoleapplication1\consoleapplication1.cpp(44): warning C4477: 'printf' : la chaîne de format '%f' nécessite un argument de type 'double', mais l'argument variadique 1 est de type 'int'
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour0\consoleapplication1\consoleapplication1\consoleapplication1.cpp(76): warning C4307: '*' : dépassement de constante intégrale
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour0\consoleapplication1\consoleapplication1\consoleapplication1.cpp(88): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 1 est de type '_Rep'
           with
           [
