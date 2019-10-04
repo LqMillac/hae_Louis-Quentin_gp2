@@ -269,6 +269,33 @@ void ZeroMemory(char *dest, int size)
 	ZeroMemory(dest + 1, size -1);
 }
 
+void MempyRec(char *dest, const char *src, int size)
+{
+	if (size-1 < 0)
+	{
+		*dest = 0;
+		return;
+	}
+	*dest = *src; 
+	MempyRec(dest + 1, src + 1, size - 1);
+}
+
+int StrcmRec(char *str0, char *str1)
+{
+	if (*str0 == 0 && *str1 == 0) return 0; 
+	if (*str0 == 0) return 1;
+	if (*str1 == 0) return -1;
+	if (*str0 < *str1) return -1;
+	if (*str0 > *str1) return 1;
+	return StrcmRec(str0+1 ,str1+1);
+
+}
+void StrcatRec(char *str0, char *str1)
+{
+	if (*str1 == 0) return; 
+	if (*str0 == 0) return StrcatRec(str0, str1);
+}
+
 void TestRec()
 {
 	/*int foo = add_2(2, 2);
@@ -282,16 +309,43 @@ void TestRec()
 	//int foo7 = quotien(16, 3);
 	int i = 0;
 	char dest[30];
+	
 	int len = Strlen("sapin");
-	  Strcopy(dest,"chene");
-	printf("%d\n", len);
+	 // Strcopy(dest,"chene");
+	//printf("%d\n", len);
+	//printf("%s\n", dest);
+	//int sizeBuf = 32;
+	//char *buffer = (char*)malloc(sizeBuf + 1);
+	//buffer[32] = 'X';
+	//ZeroMemory(buffer, sizeBuf);
+	//printf("%c", buffer[32]);
+	//system("pause");
+	MempyRec(dest, "lapin",2);
 	printf("%s\n", dest);
-	int sizeBuf = 32;
-	char *buffer = (char*)malloc(sizeBuf + 1);
-	buffer[32] = 'X';
-	ZeroMemory(buffer, sizeBuf);
-	printf("%c", buffer[32]);
-	system("pause");
+
+	{
+		 char lapin[32] = "a";
+		 char lapine[32] = "a";
+		 int resultat = StrcmRec(lapin, lapine);
+		 printf("%d\n", resultat);
+		
+	}
+	{
+		char lapin[32] = "b";
+		char lapine[32] = "a";
+		int resultat = StrcmRec(lapin, lapine);
+		printf("%d\n", resultat);
+
+	}
+	{
+		char lapin[32] = "a";
+		char lapine[32] = "b";
+		int resultat = StrcmRec(lapin, lapine);
+		printf("%d\n", resultat);
+
+	}
+
+	
 	
 	
 	
