@@ -20,6 +20,30 @@ Vec3 incrX(Vec3 _in) {
 	temp.y++; 
 	return stackOverFlow(temp);
 }*/
+
+int Strlen(const char * src )
+{
+	int counter = 0;
+
+	for (int i = 0; src[i] !=0; ++i)
+	{
+		counter++;
+		
+	}
+	return counter;
+
+}
+int Strcpy(char * dest, const char * src) {
+	// put copy in dest 
+	int i = 0;
+	for (i = 0; i != Strlen(src); i++)
+	{
+		dest[i] = src[i];
+	}
+	dest[i + 1] = 0;
+	return 0;
+	
+}
 int main()
 
 {
@@ -31,63 +55,89 @@ int main()
 	//toto =incrX(toto);
 	//printf("xval:%f\n", toto.x);
 
-	int *v = (int*)malloc(4);
+	//int *v = (int*)malloc(4);
 
 	/*Vec3 bob = { 1,2,3 };
 	bob =stackOverFlow(bob);
 	printf("val x : %f\n", bob.x);*/
+	//
+	//Vec3 vecTab[3];
+	//vecTab[0] = { 66,66,66};
+	//vecTab[1] = { 4,5,6 };
+	//vecTab[2] = { 7,8,9 };
+	//printf("v0x %f\n", vecTab[0].x);
+
+
+	//Vec3 *t0 = 0;
+	//Vec3 *t1 = nullptr;
+	//Vec3 *t2 = &vecTab[1];
+	//
+	//t2++;
+
+	//(*t2).y = 777;
+	//t2->y = 888;
+	//Vec3* iter = &vecTab[0];
+	//int i = 0;
+	//for (i = 0; i < 3; ++i) {
+	//
+	//	printf("val vec x: %d\n", iter->x);
+	//	iter++;
+	//}
+
+	//Vec3 *t3 = t2 + 1;
+	//t2++;
+
+	//const char label2[6] = { 's','a','p','i','n',0 };
+
+	//const char * ptr = &label2[0];
+	//ptr++;
+	//printf("%c\n",*ptr);
+
+	//
+
+	//auto start = std::chrono::system_clock::now();
+
+	//int * bigBlock = (int*) malloc(1024 * 1024 * 1024);
+
+	//for (int k = 0; k < 64 * 1024 * 1024; ++k)
+	//{
+	//	bigBlock[k] = 0xdeadbeef;
+	//}
+
+
+	//printf("beef ? : %x\n", bigBlock[1024 * 1024]);
+
+	//auto end = std::chrono::system_clock::now();
+	//auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+	//printf("time ? :%d\n", millis);
+
+	//Vec3 tableau[16];
+	//Vec3 *tableau0 = (Vec3*)malloc(sizeof(Vec3) * 16); // en C pur 
+
+	//memset(tableau, 0, sizeof(sizeof(Vec3) * 16));
+
+	//Vec3 *tableau1 = (Vec3*)calloc(sizeof(Vec3), 16);   // en C pur 
+
+	//Vec3 *tableau2 = new Vec3[16];   // en C++
+
+	//Vec3 *UnSeulVec = new Vec3(); // c++ allocation dynamique
+
+	//Vec3 UnSeulVecAussiMaisSurLeTas = Vec3();  // c++ allocation statique
+
+
+
+
+	const char * source = "mon lapin est dodu";
 	
-	Vec3 vecTab[3];
-	vecTab[0] = { 66,66,66};
-	vecTab[1] = { 4,5,6 };
-	vecTab[2] = { 7,8,9 };
-	printf("v0x %f\n", vecTab[0].x);
+	char * dest = (char*)calloc(1024, sizeof(char));
+	Strcpy(dest, source);
 
+	printf("dest len:%d \n val: %s \n", Strlen(source), dest);
 
-	Vec3 *t0 = 0;
-	Vec3 *t1 = nullptr;
-	Vec3 *t2 = &vecTab[1];
-	
-	t2++;
-
-	(*t2).y = 777;
-	t2->y = 888;
-	Vec3* iter = &vecTab[0];
-	int i = 0;
-	for (i = 0; i < 3; ++i) {
-	
-		printf("val vec x: %d\n", iter->x);
-		iter++;
-	}
-
-	Vec3 *t3 = t2 + 1;
-	t2++;
-
-	const char label2[6] = { 's','a','p','i','n',0 };
-
-	const char * ptr = &label2[0];
-	ptr++;
-	printf("%c\n",*ptr);
 
 	
-
-	auto start = std::chrono::system_clock::now();
-
-	int * bigBlock = (int*) malloc(1024*1024 * 1024 * 1024);
-
-	for (int k = 0; k < 64 * 1024 * 1024; ++k)
-	{
-		bigBlock[k] = 0xdeadbeef;
-	}
-
-
-	printf("beef ? : %x\n", bigBlock[1024 * 1024]);
-
-	auto end = std::chrono::system_clock::now();
-	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-	printf("time ? :%d\n", millis);
-
 	int _i = 0;
+
 
 	
 
