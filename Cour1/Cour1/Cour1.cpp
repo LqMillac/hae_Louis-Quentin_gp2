@@ -41,6 +41,22 @@ int StrChr3(char*grange, char chat)
 	}
 	return-1;
 }
+int StrChr4(char*grange, char chat)
+{
+	char *oldGrange = grange;
+
+	while (*grange)
+	{
+
+		if (*grange == chat)
+		{
+
+			return (int)(grange - oldGrange);
+		}
+		grange++;;
+	}
+	return-1;
+}
 
 
 //void Memcpy(char * dest, char * src, int size) 
@@ -82,6 +98,6 @@ int main()
 
 	char chateau[32]= "chateau";
 	char soldat = 'e';
-	int posSoldat = StrChr(chateau, soldat);
+	int posSoldat = StrChr4(chateau, soldat);
 	printf("le chateau est en position %d\n", posSoldat);
 }
