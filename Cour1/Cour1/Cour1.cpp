@@ -196,16 +196,53 @@ int add_3(int a, int b)
 		return inter;
 
 	}
+}
 
+int sub(int a, int b)
+{
 	
+	printf("a:%d,b:%d\n", a, b);
+	if (b == 0) return a;
+	else if (b > 0)
+		return sub(a, b - 1) - 1;
+	else 
+		return sub(a, b +1) +1;
+}
 
+int mult(int a, int b)
+
+{
+	
+	if (b == 0) return 0;
+	if (a == 0) return 0;
+	if (b < 0) return -mult(a, -b);
+	else
+		return  a + mult(a,b-1);
+
+
+}
+
+int Division(int a, int b)
+{
+	if (a == 0) return 0;
+	if (b == 0) return 0; 
+	if (b < 0) return -Division(a, -b);
+	else
+		return 1 + Division(a - b, b);
 }
 
 void TestRec()
 {
-	int foo = add_2(2, 2);
-	int foo2 = add_3(5, 4);
+	/*int foo = add_2(2, 2);
+	int foo2 = add_3(5, 4);*/
+	
+	//int foo3 = sub(8, 2);
+	int foo4 = mult(2, 2);
+	int foo5 = mult(2, -5);
+	int foo6 = Division(10, 2);
+	printf("%d\n", Division(-10, -2));
 	int i = 0;
+	
 	
 }
 
