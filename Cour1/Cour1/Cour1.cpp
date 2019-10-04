@@ -245,6 +245,29 @@ int quotien(int a, int b)
 
 		// mod (a,b) = a-mult (b,div(a,b))
 }
+int Strlen(const char * src )
+{
+	if (* src==0) return 0;
+	else
+		return 1 + Strlen( src+1);
+	
+
+}
+void Strcopy(char *dest , const char *src)
+{
+	*dest = *src;
+	if (*src == 0)
+		return;
+	else
+		 Strcopy(dest + 1, src + 1);
+}
+
+void ZeroMemory(char *dest, int size)
+{
+	if (size == 0) return; 
+	*dest = 0;
+	ZeroMemory(dest + 1, size -1);
+}
 
 void TestRec()
 {
@@ -252,12 +275,26 @@ void TestRec()
 	int foo2 = add_3(5, 4);*/
 	
 	//int foo3 = sub(8, 2);
-	int foo4 = mult(2, 2);
-	int foo5 = mult(2, -5);
-	int foo6 = Division(10, 2);
-	printf("%d\n", Division(10, 2));
-	int foo7 = quotien(16, 3);
+	//int foo4 = mult(2, 2);
+	//int foo5 = mult(2, -5);
+	//int foo6 = Division(10, 2);
+	//printf("%d\n", Division(10, 2));
+	//int foo7 = quotien(16, 3);
 	int i = 0;
+	char dest[30];
+	int len = Strlen("sapin");
+	  Strcopy(dest,"chene");
+	printf("%d\n", len);
+	printf("%s\n", dest);
+	int sizeBuf = 32;
+	char *buffer = (char*)malloc(sizeBuf + 1);
+	buffer[32] = 'X';
+	ZeroMemory(buffer, sizeBuf);
+	printf("%c", buffer[32]);
+	system("pause");
+	
+	
+	
 	
 	
 }
