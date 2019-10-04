@@ -3,6 +3,9 @@
 #include "pch.h"
 #include <iostream>
 
+
+static void TestRec();
+
 int Max(int a, int b)
 {
 	return (a < b) ? b : a;
@@ -155,9 +158,60 @@ void Memcpy2(char * dest, char * src, int size)
 	// décremente la valeur de size 
 }
 
+int add_0(int a, int b)
+{
+	int i = 0;
+	for (i = 0; i < a + b; i++);
+	return i;
+}
+int add_1(int a, int b)
+{
+	int val = a;
+	for (int i = 0; i < b; i++);
+	val++;
+	return val;
+}
+int add_2(int a, int b)
+{
+	// add_2 (7 8)
+	// add_2 (6 9)
+	// add_2 (5 10)
+	// add_2 (0 15)
+	// a+0 => a
+	if (a == 0)
+		return b;
+	else 
+	return add_2(a - 1, b + 1);
+}
+int add_3(int a, int b)
+{
+	
+	if (a == 0)		    return b;
+	else if (b == 0)	return a;
+	else
+	{
+
+		int inter = 1 + add_3(a - 1, b);
+		printf("a:%d,b:%d, = %d\n", a,b,inter);
+		return inter;
+
+	}
+
+	
+
+}
+
+void TestRec()
+{
+	int foo = add_2(2, 2);
+	int foo2 = add_3(5, 4);
+	int i = 0;
+	
+}
+
 int main()
 {
-    std::cout << "Hello World!\n"; 
+    /*std::cout << "Hello World!\n"; 
 
 	char licorne[32] = "licorne";
 	char vomi[32] = "vomit";
@@ -182,6 +236,9 @@ int main()
 	char text0[] = "licorne";
 	char text1[] = "licorn";
 	printf("%d\n",strcmp(text0, text1));
-	printf("%d\n", strcmp(text1, text0));
+	printf("%d\n", strcmp(text1, text0));*/
+
+	TestRec();
+	
 }
 
