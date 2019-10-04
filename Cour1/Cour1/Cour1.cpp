@@ -224,11 +224,26 @@ int mult(int a, int b)
 
 int Division(int a, int b)
 {
-	if (a == 0) return 0;
-	if (b == 0) return 0; 
-	if (b < 0) return -Division(a, -b);
+	if (a == 0)               return 0;
+	if (a < 0 && b < 0)       return -Division(a, b);
+	if (a < 0)                return -Division(-a, b);
+	if (b < 0)                return -Division(a, -b);
+	if (a < b)                return 0;
 	else
 		return 1 + Division(a - b, b);
+}
+int quotien(int a, int b)
+{
+	if (a == 0) return 0;
+	if (b == 0) return a;
+	if (a < 0) return 0;
+	if (b < 0) return a;
+
+	else
+		return (a - mult(b, Division(a, b)));
+
+
+		// mod (a,b) = a-mult (b,div(a,b))
 }
 
 void TestRec()
@@ -240,7 +255,8 @@ void TestRec()
 	int foo4 = mult(2, 2);
 	int foo5 = mult(2, -5);
 	int foo6 = Division(10, 2);
-	printf("%d\n", Division(-10, -2));
+	printf("%d\n", Division(10, 2));
+	int foo7 = quotien(16, 3);
 	int i = 0;
 	
 	
