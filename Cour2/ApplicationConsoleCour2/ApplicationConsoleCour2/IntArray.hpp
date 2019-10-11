@@ -84,7 +84,7 @@ public:
 	}
 	void insert(int pos, int elem)
 	{
-		ensure(curSize + 1);
+		ensure((pos>=curSize) ? (curSize+1) :(pos+1));
 		for (int i = curSize; i > pos; i--)
 		{
 			data[i] = data[i - 1];
