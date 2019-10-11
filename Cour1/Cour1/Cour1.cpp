@@ -290,14 +290,70 @@ int StrcmRec(char *str0, char *str1)
 	return StrcmRec(str0+1 ,str1+1);
 
 }
-void StrcatRec(char *str0, char *str1)
+void StrCat(char * dst, const char * src)
 {
-	if (*str1 == 0) return; 
-	if (*str0 == 0) return StrcatRec(str0, str1);
+	if (*src == 0)
+		return;
+	if (*dst != 0)
+		return StrCat(dst + 1, src);
+	*dst = *src;
+	return StrCat(dst + 1, src + 1);
+}
+int StrCmp(const char *dst, const char *src)
+{
+	if (*dst == 0 && *src == 0) return 0;
+	else if (*dst < *src) return 1;
+	else if (*dst > *src) return -1;
+	return StrCmp(dst + 1, src + 1);
+}
+void assert(bool b)
+{
+	if (!b) throw std::exception();
+}
+int _StrChr(const char *dst, char src, const char * _start)
+{
+	if (*dst == 0 && src != 0)
+		return -1;
+	else if (*dst == src)
+		return (dst - _start);
+	else
+		return _StrChr(dst + 1, src, _start);
+}
+int StrChr2(const char *dst, char src, const char * _origin = nullptr)
+{
+	if (_origin == nullptr)
+		return StrChr2(dst,src,dst);
+	else if (*dst == src)
+		return (dst - _origin);
+	else
+		return _StrChr(dst + 1, src, _origin);
+}
+int StrChr(const char *dst, char src)
+{
+	return _StrChr(dst, src, dst);
+}
+bool  startsWith(const char *s0, const char *s1)
+{
+	if (*s0 == 0 && *s1 != 0)
+		return false; 
+	if (*s1 == 0)
+		return false; 
+	if (*s0 != *s1)
+		return false;
+	else
+		return startsWith(s0 + 1, s1 + 1);
+}
+const char *StrStr(const char *s0, const char *s1)
+{
+	if (startsWith(s0, s1))
+		return s0;
+	else
+		return StrStr(s0 + 1, s1);
 }
 
 void TestRec()
 {
+	
 	/*int foo = add_2(2, 2);
 	int foo2 = add_3(5, 4);*/
 	
@@ -308,9 +364,9 @@ void TestRec()
 	//printf("%d\n", Division(10, 2));
 	//int foo7 = quotien(16, 3);
 	int i = 0;
-	char dest[30];
+	//char dest[30];
 	
-	int len = Strlen("sapin");
+	//int len = Strlen("sapin");
 	 // Strcopy(dest,"chene");
 	//printf("%d\n", len);
 	//printf("%s\n", dest);
@@ -320,8 +376,8 @@ void TestRec()
 	//ZeroMemory(buffer, sizeBuf);
 	//printf("%c", buffer[32]);
 	//system("pause");
-	MempyRec(dest, "lapin",2);
-	printf("%s\n", dest);
+	//MempyRec(dest, "lapin",2);
+	/*printf("%s\n", dest);
 
 	{
 		 char lapin[32] = "a";
@@ -343,7 +399,7 @@ void TestRec()
 		int resultat = StrcmRec(lapin, lapine);
 		printf("%d\n", resultat);
 
-	}
+	}*/
 
 	
 	
@@ -355,6 +411,21 @@ void TestRec()
 
 int main()
 {
+	const char* animaux = "licorne";
+	const char* ani = "lic";
+	
+	char dst[1024] = "sapin0";
+	assert(StrCmp("","") == 0);
+	assert(StrCmp("sapin", "sapin") == 0);
+
+	StrCat(dst, "sapin1");
+	StrCat(dst, "sapin1");
+	StrCat(dst,"");
+
+	
+
+	
+	printf("%s\n", dst);
     /*std::cout << "Hello World!\n"; 
 
 	char licorne[32] = "licorne";
