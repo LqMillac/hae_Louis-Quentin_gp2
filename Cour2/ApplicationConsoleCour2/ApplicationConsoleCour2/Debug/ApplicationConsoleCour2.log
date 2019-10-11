@@ -1,6 +1,7 @@
 ﻿  pch.cpp
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour2\applicationconsolecour2\applicationconsolecour2\intarray.hpp(33): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
   ApplicationConsoleCour2.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour2\applicationconsolecour2\applicationconsolecour2\applicationconsolecour2.cpp(30): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour2\applicationconsolecour2\applicationconsolecour2\applicationconsolecour2.cpp(31): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
   IntArray.cpp
   Génération de code en cours...
   ApplicationConsoleCour2.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\Cour2\ApplicationConsoleCour2\Debug\ApplicationConsoleCour2.exe
