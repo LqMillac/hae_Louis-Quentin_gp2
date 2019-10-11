@@ -65,37 +65,8 @@ public:
 		ensure(pos+1);
 		return data[pos];
 	}
-	void push_back(int elem)
-	{
-		ensure(curSize+1);
-		data[curSize] = elem;
-		curSize++;
-
-	}
-	void push_front(int elem)
-	{
-		ensure(curSize+1);
-		for (int i = curSize; i > 0; i--)
-		{
-			data[i] = data[i-1];
-		}
-		data[0] = elem;
-		curSize++;
-	}
-	void insert(int pos, int elem)
-	{
-		ensure((pos>=curSize) ? (curSize+1) :(pos+1));
-		for (int i = curSize; i > pos; i--)
-		{
-			data[i] = data[i - 1];
-		}
-		data[pos] = elem;
-		if (pos >= pos + 1)
-			curSize = pos + 1;
-		else
-		curSize++;
-			
-
-	}
+	void push_back(int elem);
+	void push_front(int elem);
+	void insert(int pos, int elem);
 
 };
