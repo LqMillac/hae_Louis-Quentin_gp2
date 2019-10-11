@@ -117,6 +117,17 @@ public:
 		}
 		
 	}
+	void fillWithRandom(int nbElem)
+	{
+		ensure(nbElem);
+		for (int i = 0; i < nbElem; i++)
+		{
+			int val = std::rand()%100;
+			set (i,val);
+		}
+	}
+
+	void sort();
 
 };
 	

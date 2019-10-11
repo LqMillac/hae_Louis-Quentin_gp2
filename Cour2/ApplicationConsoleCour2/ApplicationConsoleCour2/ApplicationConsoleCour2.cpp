@@ -69,16 +69,21 @@ int main()
 		int i = 0;*/
 	}
 	{
-		IntArray t(2);
+		/*IntArray t(2);
 		t[0] = 68;
 		t[1] = 69;
 		t[2] = 70;
 		t.remove(t[1]);
 		t.removeAll();
 		
-		int i =0;
-		
+		int i =0;*/
+	}
+	{
+		IntArray t(8);
+		t.fillWithRandom(8);
+		t.sort();
 	
+		int i = 0;
 	}
 }
 

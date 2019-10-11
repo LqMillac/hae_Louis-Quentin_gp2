@@ -1,6 +1,2 @@
-﻿  pch.cpp
-  ApplicationConsoleCour2.cpp
-  IntArray.cpp
-  Génération de code en cours...
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour2\applicationconsolecour2\applicationconsolecour2\intarray.hpp(110): warning C4715: 'IntArray::remove' : les chemins de contrôle ne retournent pas tous une valeur
+﻿  IntArray.cpp
   ApplicationConsoleCour2.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\Cour2\ApplicationConsoleCour2\Debug\ApplicationConsoleCour2.exe
