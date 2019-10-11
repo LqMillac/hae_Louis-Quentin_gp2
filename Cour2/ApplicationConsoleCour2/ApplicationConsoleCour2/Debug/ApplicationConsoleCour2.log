@@ -1,4 +1,5 @@
 ﻿  pch.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour2\applicationconsolecour2\applicationconsolecour2\intarray.hpp(33): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
   ApplicationConsoleCour2.cpp
   IntArray.cpp
   Génération de code en cours...
