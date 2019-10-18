@@ -1,3 +1,3 @@
-﻿  cour3.cpp
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour3\cour3\cour3\cour3.cpp(67): error C2660: 'IntArray::searchposition' : la fonction ne prend pas 0 arguments
-  c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour3\cour3\cour3\intarray.hpp(77): note: voir la déclaration de 'IntArray::searchposition'
+﻿  IntArray.cpp
+Debug\Util.obj : warning LNK4042: objet spécifié plus d'une fois ; définitions supplémentaires ignorées
+  cour3.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\Cour3\cour3\Debug\cour3.exe
