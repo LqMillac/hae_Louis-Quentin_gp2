@@ -79,10 +79,15 @@ int main()
 		int i =0;*/
 	}
 	{
-		IntArray t(8);
+		/*IntArray t(8);
 		t.fillWithRandom(8);
 		t.sort();
 	
+		int i = 0;*/
+	}
+	{
+		IntArray t(5);
+		t.set_unsafe(8, 5);
 		int i = 0;
 	}
 }
