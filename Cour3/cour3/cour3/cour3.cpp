@@ -2,15 +2,34 @@
 #include <iostream>
 #include "IntArray.hpp"
 #include "Util.hpp"
+#include "List.hpp"
 
 void assert(bool b) {
 	if (!b) throw std::exception();
 }
+void testIntList()
+{
+	IntList *LaListe = new IntList(8);
+	int toto = 0;
+	LaListe->Append(65);
+	assert(LaListe->Length() == 2);
+
+	LaListe = LaListe->AddFirst(33);
+	assert(LaListe->Length() == 3);
+	assert(LaListe -> elem == 33);
+
+	LaListe = LaListe->Remove(12);
+	assert(LaListe->Length() == 3);
+	LaListe = LaListe->Remove(33);
+	assert(LaListe->Length() == 2);
+	int k = 0;
+}
 int main()
 {
-	std::cout << "Hello World!\n";
+	testIntList();
+	
 
-	const int len = 4;
+	/*const int len = 4;
 	int sizes[len] = { 4, 8, 16, 32 };
 	double prev = 0.000000000001;
 	for (int k = 0; k < len; k++)
@@ -94,5 +113,7 @@ int main()
 		}
 	}
 
-	int l = 0;
+	int l = 0;*/
+
+
 }
