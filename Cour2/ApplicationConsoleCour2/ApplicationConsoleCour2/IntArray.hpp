@@ -127,7 +127,7 @@ public:
 		}
 	}
 
-	void sort();
+	void insertsort();
 
 };
 	
