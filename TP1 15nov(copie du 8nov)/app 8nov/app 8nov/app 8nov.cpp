@@ -10,6 +10,7 @@
 #include <direct.h>
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Ball.h"
 
 using namespace sf;
 /*Vector2i Point1(100, 100);
@@ -20,6 +21,7 @@ Vector2i Point5(500, 500);
 Vector2i Point6(600, 600);
 Vector2i Point7(700, 700);*/
 static std::vector<Entity> CharList;
+static std::vector<Ball> BallList;
 sf::Color hsv(int hue, float sat, float val)
 {
 	hue %= 360;
@@ -51,17 +53,23 @@ sf::Color hsv(int hue, float sat, float val)
 }
 static Vector2f shPos(0,0);
 //static Vector2f ballpos(shPos);
-int fireball = 20;
+
 int squareSpeed = 3;
+int BallSpeed = 5;
+int Left=-1;
+int Right=1;
+
 sf::FloatRect boundingBox;
 Vector2f Alpha;
 sf::FloatRect otherBox;
+
 bool collision = false;
 bool collisionR = false;
 bool collisionL = false;
 bool collisionU = false;
 bool collisionD = false;
 Vector2f Beta;
+
 void world(sf::RenderWindow &win)
 {
 	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
@@ -100,12 +108,28 @@ void world(sf::RenderWindow &win)
 		squareSpeed = 3;
 	}
 
+	if (Left==-1)
+	{
+		BallList[0].position.x -= BallSpeed;
+		//BallList[0].position.y -= BallSpeed;
+		
+	}
+
+
 }
 void drawTank(sf::RenderWindow &win)
 {
 	for (Entity &Elem : CharList)
 	{
 		win.draw(Elem.tank);
+		Elem.SetPosition();
+	}
+}
+void drawBall(sf::RenderWindow &win)
+{
+	for (Ball &Elem : BallList)
+	{
+		win.draw(Elem.ball);
 		Elem.SetPosition();
 	}
 }
@@ -233,14 +257,17 @@ void drawTank(sf::RenderWindow &win)
 int main()
 {
 
-	Entity Player = Entity(Vector2f(20, 20),Vector2f(30,30));
+	Entity Player = Entity(Vector2f(20,200),Vector2f(15,80));
 	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
+
+	Ball Balle = Ball(Vector2f(400, 300),20);
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
 
+	BallList.push_back(Balle);
 
-
+	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
 	static RectangleShape sh;
@@ -436,6 +463,7 @@ int main()
 		//drawCurve(window,clock.getElapsedTime().asSeconds());
 		//drawCatmull(window,clock.getElapsedTime().asSeconds());
 		drawTank(window);
+		drawBall(window);
 		window.draw(myFpsCounter);
 		
 

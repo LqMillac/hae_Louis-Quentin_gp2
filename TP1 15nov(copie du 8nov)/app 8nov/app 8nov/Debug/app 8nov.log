@@ -1,12 +1,12 @@
 ﻿  app 8nov.cpp
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(44): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(45): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(46): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(47): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(48): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(49): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(344): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(360): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(377): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(394): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(50): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(51): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(371): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(387): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(404): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(421): warning C4551: liste d'arguments manquante dans l'appel de fonction
   app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe
