@@ -9,15 +9,17 @@
 #include "Lib.h"
 #include <direct.h>
 #include <SFML/Graphics.hpp>
+#include "Entity.h"
 
 using namespace sf;
-Vector2i Point1(100, 100);
+/*Vector2i Point1(100, 100);
 Vector2i Point2(200, 200);
 Vector2i Point3(300, 300);
 Vector2i Point4(400, 400);
 Vector2i Point5(500, 500);
 Vector2i Point6(600, 600);
-Vector2i Point7(700, 700);
+Vector2i Point7(700, 700);*/
+static std::vector<Entity> CharList;
 sf::Color hsv(int hue, float sat, float val)
 {
 	hue %= 360;
@@ -48,26 +50,83 @@ sf::Color hsv(int hue, float sat, float val)
 	}
 }
 static Vector2f shPos(0,0);
-static Vector2f ballpos(shPos);
+//static Vector2f ballpos(shPos);
 int fireball = 20;
 int squareSpeed = 3;
-void Firegun(sf::RenderWindow&win)
+sf::FloatRect boundingBox;
+Vector2f Alpha;
+sf::FloatRect otherBox;
+bool collision = false;
+bool collisionR = false;
+bool collisionL = false;
+bool collisionU = false;
+bool collisionD = false;
+Vector2f Beta;
+void world(sf::RenderWindow &win)
+{
+	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
+	{
+		CharList[0].position.x = Beta.x;
+		CharList[0].position.y = Beta.y;
+		squareSpeed = 0;
+		/*if (collision==false)
+		{
+			Alpha = CharList[0].position;
+			printf("collision",collision);
+			collision = true;
+
+		}
+		if (collision == true)
+		{
+			CharList[0].position = Alpha;
+		}
+	
+		boundingBox = CharList[0].tank.getGlobalBounds();
+		//boundingBox.left
+		squareSpeed = 3;*/
+	}
+	else 
+	{
+		/*if (collision == true)
+		{
+			collisionD = false;
+			collisionR= false;
+			collisionL= false;
+			collisionU = false;
+			collision = false;
+		}*/
+		Beta.x = CharList[0].position.x;
+		Beta.y = CharList[0].position.y;
+		squareSpeed = 3;
+	}
+
+}
+void drawTank(sf::RenderWindow &win)
+{
+	for (Entity &Elem : CharList)
+	{
+		win.draw(Elem.tank);
+		Elem.SetPosition();
+	}
+}
+/*void Firegun(sf::RenderWindow&win)
 {
 	sf::RectangleShape ball(Vector2f(20, 20));
 	ball.setFillColor(sf::Color::Green);
 	ball.setPosition(ballpos);
 	win.draw(ball);
 	
-}
+}*/
 
-void drawMovingSquare(sf::RenderWindow &win)
+
+/*void drawMovingSquare(sf::RenderWindow &win)
 {
-	sf::RectangleShape carre(Vector2f(100, 100));
-	carre.setFillColor(sf::Color::Red);
+	sf::RectangleShape carre(Vector2f(50,50));
+	carre.setFillColor(sf::Color::Magenta);
 	carre.setPosition(shPos);
 	win.draw(carre);
-}
-void drawCatmull(sf::RenderWindow &win, float now) {
+}*/
+/*void drawCatmull(sf::RenderWindow &win, float now) {
 	sf::VertexArray va(sf::LineStrip);
 	sf::Color red = sf::Color::Red;
 	sf::Color blue = sf::Color::Blue;
@@ -81,7 +140,7 @@ void drawCatmull(sf::RenderWindow &win, float now) {
 		/*Vector2f v(j * 100, j * 100);
 		if (j == 0)v.x += 50;
 		if (j == 3)v.x += 350;
-		points.push_back(v);*/
+		points.push_back(v);
 		Vector2f v(j * 100, j * 100);
 		if (j == 1) { v.x = Point1.x; v.y = Point1.y; }
 		if (j == 2) { v.x = Point2.x; v.y = Point2.y; }
@@ -93,8 +152,6 @@ void drawCatmull(sf::RenderWindow &win, float now) {
 		
 		points.push_back(v);
 	}
-	
-
 
 		sf::CircleShape shape(20.f, (int)(2 * 3.141569 * 100));
 		shape.setOrigin(Vector2f(16, 16));
@@ -131,7 +188,7 @@ void drawCatmull(sf::RenderWindow &win, float now) {
 
 	//win.draw(va);
 	//win.draw(shape);
-}
+}*/
 
 /*void drawCurve(sf::RenderWindow &win,float now) {
 	sf::VertexArray va(sf::LinesStrip);
@@ -175,21 +232,26 @@ void drawCatmull(sf::RenderWindow &win, float now) {
 }*/
 int main()
 {
-	//std::cout << "Hello World!\n";
+
+	Entity Player = Entity(Vector2f(20, 20),Vector2f(30,30));
+	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
+
+	CharList.push_back(Player);
+	CharList.push_back(Ennemy);
+
+
 
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
 	static RectangleShape sh;
-	
 
 	sf::RenderWindow window(sf::VideoMode(800,600), "SFML works!", sf::Style::Default, settings);
-	/*sf::CircleShape shape(100.f, (int)(2 * 3.141569 * 100));
-	shape.setPosition(30, 30);
-	shape.setFillColor(sf::Color(0xE884D4ff));
-	shape.setOutlineThickness(4);
-	shape.setOutlineColor(sf::Color(0xFF8A70ff));*/
-	window.setVerticalSyncEnabled(true);
+#pragma region MyRegion
 
+
+
+
+	window.setVerticalSyncEnabled(true);
 	sf::Clock clock;
 
 	sf::Time appStart = clock.getElapsedTime();
@@ -206,6 +268,7 @@ int main()
 
 	sf::Text myFpsCounter;
 	int every = 0;
+#pragma endregion
 	while (window.isOpen())//on passe tout le temps DEBUT DE LA FRAME 
 	{
 		sf::Event event;//recup les evenement clavier/pad
@@ -231,6 +294,7 @@ int main()
 				break;
 			}
 		}
+		world(window);
 		sf::Vector2i globalPosition = sf::Mouse::getPosition();
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
 		{
@@ -260,8 +324,7 @@ int main()
 		{
 			Point7 = globalPosition;
 		}*/
-		//--------------------------------------------------------------
-
+		//-------------------------------------------------------------
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			shPos.y -= squareSpeed;
@@ -281,33 +344,69 @@ int main()
 		if (sf::Joystick::isConnected)
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-			if (x > 0.5)
-			shPos.x += squareSpeed;
+			if (x > 25 /*collisionL == false*/)
+			{
+				//Alpha = CharList[0].position;
+				CharList[0].position.x += squareSpeed;
+				/*if (collision == true)
+				{
+					collisionL = true;
+					squareSpeed = 20;
+				}
+				collisionL = false;*/
+			}
 			
 		}
 		if (sf::Joystick::isConnected)
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-			if (x < -0.5)
-				shPos.x -= squareSpeed;
+			if (x < -25 /*collisionR == false*/)
+			{
+				//Alpha = CharList[0].position;
+				CharList[0].position.x -= squareSpeed;
+				/*if (collision == true)
+				{
+					collisionR = true;
+					squareSpeed = 20;
+				}
+				collisionR = false;*/
+
+			}
 
 		}
 		if (sf::Joystick::isConnected)
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-			if (y > 0.5)
-				shPos.y += squareSpeed;
+			if (y > 25 /*collisionU ==false*/)
+			{
+				//Alpha = CharList[0].position;
+				CharList[0].position.y += squareSpeed;
+				/*if (collision == true)
+				{
+					collisionU = true;
+					squareSpeed = 20;
+				}
+				collisionU = false;*/
+
+			}
 
 		}
 		if (sf::Joystick::isConnected)
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-			if (y < -0.5)
-				shPos.y -= squareSpeed;
+			if (y < -25)
+			{
+				Alpha = CharList[0].position;
+				CharList[0].position.y -= squareSpeed;
+			}
 
 		}
-		
-		
+		/*if (collision)
+		{
+			printf("Blocked");
+			CharList[0].position = Alpha;
+		}*/
+	
 
 		/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
@@ -335,10 +434,12 @@ int main()
 		window.clear();//nettoie la frame
 		//window.draw(shape);//on demande le dessin d' une forme
 		//drawCurve(window,clock.getElapsedTime().asSeconds());
-		drawCatmull(window,clock.getElapsedTime().asSeconds());
-		
+		//drawCatmull(window,clock.getElapsedTime().asSeconds());
+		drawTank(window);
 		window.draw(myFpsCounter);
-		drawMovingSquare(window);
+		
+
+		//drawMovingSquare(window);
 		//Firegun(window);
 		window.display();//ca dessine et ca attend la vsync
 		
