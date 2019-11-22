@@ -24,7 +24,7 @@ public:
 		Viseur.setPosition(pos);
 		
 		Viseur.setFillColor(sf::Color::Cyan);
-		Viseur.setSize(sf::Vector2f(5,30));
+		Viseur.setSize(sf::Vector2f(5,44));
 		
 	
 		

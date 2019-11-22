@@ -8,6 +8,7 @@ public:
 	sf::Vector2f position;
 	sf::CircleShape ball;
 	sf::CircleShape BallCollider;
+	int BallLife;
 	float U;
 	float V;
 	Ball(sf::Vector2f pos,float size)

@@ -61,11 +61,18 @@ int squareSpeed = 8;
 
 int Left=-1;
 int Right=1;
+int BallLife = 0;
 bool Shoot = false;
+bool Shoot2 = false;
 
 sf::FloatRect boundingBox;
 Vector2f Alpha;
 sf::FloatRect otherBox;
+float U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
+float V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+float angle = (atan2(U, V) * 180 / 3.141592654);
+
+
 
 bool collision = false;
 bool collisionR = false;
@@ -74,44 +81,88 @@ bool collisionU = false;
 bool collisionD = false;
 Vector2f Beta;
 
+
+
 void world(sf::RenderWindow &win)
 {
-	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds())|| CharList[0].tank.getGlobalBounds().intersects(WallList[0].mur.getGlobalBounds())
-		|| CharList[0].tank.getGlobalBounds().intersects(WallList[1].mur.getGlobalBounds()) || CharList[0].tank.getGlobalBounds().intersects(WallList[2].mur.getGlobalBounds())
-		|| CharList[0].tank.getGlobalBounds().intersects(WallList[3].mur.getGlobalBounds()))
+	
+	for (int i = 0; i < WallList.size(); i++)
+	{
+		if (CharList[0].tank.getGlobalBounds().intersects(WallList[i].mur.getGlobalBounds()))
+		{
+			CharList[0].position.x = Beta.x;
+			CharList[0].position.y = Beta.y;
+			squareSpeed = 0;
+		}
+	}
+	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
 	{
 		CharList[0].position.x = Beta.x;
 		CharList[0].position.y = Beta.y;
 		squareSpeed = 0;
-		/*if (collision==false)
-		{
-			Alpha = CharList[0].position;
-			printf("collision",collision);
-			collision = true;
-
-		}
-		if (collision == true)
-		{
-			CharList[0].position = Alpha;
-		}
-	
-		boundingBox = CharList[0].tank.getGlobalBounds();
-		//boundingBox.left
-		squareSpeed = 3;*/
 	}
-	else 
+	else
 	{
-		/*if (collision == true)
-		{
-			collisionD = false;
-			collisionR= false;
-			collisionL= false;
-			collisionU = false;
-			collision = false;
-		}*/
 		Beta.x = CharList[0].position.x;
 		Beta.y = CharList[0].position.y;
 		squareSpeed = 3;
+	}
+
+	for (int i = 0; i < BallList.size(); i++)
+	{
+		
+		if (WallList[0].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+		{
+			BallList[i].V = -BallList[i].V;
+			if (BallList[i].BallLife == 1)
+			{
+				BallList.erase(BallList.begin() + i);
+				break;
+			}
+			if (BallList[i].BallLife == 0)
+			{
+				BallList[i].BallLife += 1;
+			}
+		}
+		if (WallList[1].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+		{
+			BallList[i].V = -BallList[i].V;
+			if (BallList[i].BallLife == 1)
+			{
+				BallList.erase(BallList.begin() + i);
+				break;
+			}
+			if (BallList[i].BallLife == 0)
+			{
+				BallList[i].BallLife += 1;
+			}
+		}
+		if (WallList[2].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+		{
+			BallList[i].U = -BallList[i].U;
+			if (BallList[i].BallLife == 1)
+			{
+				BallList.erase(BallList.begin() + i);
+				break;
+			}
+			if (BallList[i].BallLife == 0)
+			{
+				BallList[i].BallLife += 1;
+			}
+		}
+		if (WallList[3].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+		{
+			BallList[i].U = -BallList[i].U;
+			if (BallList[i].BallLife == 1)
+			{
+				BallList.erase(BallList.begin() + i);
+				break;
+			}
+			if (BallList[i].BallLife == 0)
+			{
+				BallList[i].BallLife += 1;
+			}
+		}
 	}
 
 }
@@ -120,23 +171,18 @@ void drawTank(sf::RenderWindow &win)
 	for (Entity &Elem : CharList)
 	{
 		win.draw(Elem.tank);
-		Elem.SetPosition();
-	}
-}
-void drawViseur(sf::RenderWindow & win)
-{
-	for (Entity &Elem : CharList)
-	{
 		win.draw(Elem.Viseur);
 		Elem.SetPosition();
 	}
 }
+
 void drawBall(sf::RenderWindow &win)
 {
 	for (Ball &Elem : BallList)
 	{
 		win.draw(Elem.ball);
 		Elem.ball.move((Elem.U)/10,(Elem.V)/10);
+
 		//Elem.SetPosition();
 	}
 }
@@ -147,14 +193,7 @@ void drawWALL(sf::RenderWindow &win)
 		win.draw(Elem.mur);
 	}
 }
-/*void Firegun(sf::RenderWindow&win)
-{
-	sf::RectangleShape ball(Vector2f(20, 20));
-	ball.setFillColor(sf::Color::Green);
-	ball.setPosition(ballpos);
-	win.draw(ball);
-	
-}*/
+
 
 
 /*void drawMovingSquare(sf::RenderWindow &win)
@@ -271,8 +310,8 @@ void drawWALL(sf::RenderWindow &win)
 int main()
 {
 	
-	Entity Player = Entity(Vector2f(500,500),Vector2f(40,40));
-	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
+	Entity Player = Entity(Vector2f(150,800),Vector2f(65,65));
+	Entity Ennemy= Entity(Vector2f(1200,100),Vector2f(65,65));
 
 
 	CharList.push_back(Player);
@@ -392,7 +431,7 @@ int main()
 		{
 			shPos.x += squareSpeed;
 		}*/
-		if (sf::Joystick::isConnected)
+		if (sf::Joystick::isConnected(0))
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 			if (x > 25 /*collisionL == false*/)
@@ -408,7 +447,7 @@ int main()
 			}
 			
 		}
-		if (sf::Joystick::isConnected)
+		if (sf::Joystick::isConnected(0))
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 			if (x < -25 /*collisionR == false*/)
@@ -425,7 +464,7 @@ int main()
 			}
 
 		}
-		if (sf::Joystick::isConnected)
+		if (sf::Joystick::isConnected(0))
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 			if (y > 25 /*collisionU ==false*/)
@@ -442,7 +481,7 @@ int main()
 			}
 
 		}
-		if (sf::Joystick::isConnected)
+		if (sf::Joystick::isConnected(0))
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 			if (y < -25)
@@ -453,7 +492,7 @@ int main()
 
 		}
 	
-		if (sf::Joystick::isConnected)
+		if (sf::Joystick::isConnected(0))
 		{
 			float U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 			float V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
@@ -466,18 +505,109 @@ int main()
 
 
 
-				if (Shoot == false && sf::Joystick::isButtonPressed(0,5))
+				if (Shoot2 == false && sf::Joystick::isButtonPressed(0,5))
 				{
 
-					Ball Balle = Ball(CharList[0].Viseur.getPosition(), 5);
+					Ball Balle = Ball(CharList[0].Viseur.getPosition(), 10);
 					Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+					Balle.BallLife = 0;
 					BallList.push_back(Balle);
-
+					
+					
 
 
 				}
 				if (sf::Joystick::isButtonPressed(0, 5))
+				{
+					Shoot2 = true;
+
+				}
+				else
+				{
+					Shoot2 = false;
+				}
+			}
+
+
+		}
+
+		if (sf::Joystick::isConnected(1))
+		{
+			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+			if (x > 25 /*collisionL == false*/)
+			{
+				//Alpha = CharList[0].position;
+				CharList[1].position.x += squareSpeed;
+				/*if (collision == true)
+				{
+					collisionL = true;
+					squareSpeed = 20;
+				}
+				collisionL = false;*/
+			}
+
+		}
+		if (sf::Joystick::isConnected(1))
+		{
+			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+			if (x < -25 /*collisionR == false*/)
+			{
+				//Alpha = CharList[0].position;
+				CharList[1].position.x -= squareSpeed;
+			
+			}
+
+		}
+		if (sf::Joystick::isConnected(1))
+		{
+			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			if (y > 25 )
+			{
+				
+				CharList[1].position.y += squareSpeed;
+			
+			}
+
+		}
+		if (sf::Joystick::isConnected(1))
+		{
+			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			if (y < -25)
+			{
+				Alpha = CharList[1].position;
+				CharList[1].position.y -= squareSpeed;
+			}
+
+		}
+
+		if (sf::Joystick::isConnected(1))
+		{
+			float U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
+			float V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
+			float angle = (atan2(U, V) * 180 / 3.141592654);
+			if (U > 25 || U < -25 || V>25 || V < -25)
+			{
+
+				CharList[1].Viseur.setRotation(-angle);
+
+
+
+
+				if (Shoot == false && sf::Joystick::isButtonPressed(1, 5))
+				{
+
+					Ball Balle = Ball(CharList[1].Viseur.getPosition(), 10);
+					Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
+					Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
+					Balle.BallLife = 0;
+					BallList.push_back(Balle);
+
+
+
+
+				}
+				if (sf::Joystick::isButtonPressed(1, 5))
 				{
 					Shoot = true;
 
@@ -491,7 +621,7 @@ int main()
 
 		}
 
-	
+
 
 		/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
@@ -522,7 +652,7 @@ int main()
 		//drawCatmull(window,clock.getElapsedTime().asSeconds());
 		drawWALL(window);
 		drawTank(window);
-		drawViseur(window);
+		//drawViseur(window);
 		drawBall(window);
 		window.draw(myFpsCounter);
 		
