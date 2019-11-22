@@ -108,12 +108,7 @@ void world(sf::RenderWindow &win)
 		squareSpeed = 3;
 	}
 
-	if (Left==-1)
-	{
-		BallList[0].position.x -= BallSpeed;
-		//BallList[0].position.y -= BallSpeed;
-		
-	}
+	
 
 
 }
@@ -257,7 +252,7 @@ void drawBall(sf::RenderWindow &win)
 int main()
 {
 
-	Entity Player = Entity(Vector2f(20,200),Vector2f(15,80));
+	Entity Player = Entity(Vector2f(30,30),Vector2f(15,80));
 	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
 
 	Ball Balle = Ball(Vector2f(400, 300),20);
