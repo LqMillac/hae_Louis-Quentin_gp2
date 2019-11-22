@@ -5,6 +5,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include<Box2D/Box2D.h>
 
 #include "Lib.h"
 #include <direct.h>
@@ -117,6 +118,14 @@ void drawTank(sf::RenderWindow &win)
 	for (Entity &Elem : CharList)
 	{
 		win.draw(Elem.tank);
+		Elem.SetPosition();
+	}
+}
+void drawViseur(sf::RenderWindow & win)
+{
+	for (Entity &Elem : CharList)
+	{
+		win.draw(Elem.Viseur);
 		Elem.SetPosition();
 	}
 }
@@ -251,9 +260,10 @@ void drawBall(sf::RenderWindow &win)
 }*/
 int main()
 {
-
-	Entity Player = Entity(Vector2f(30,30),Vector2f(15,80));
+	
+	Entity Player = Entity(Vector2f(30,30),Vector2f(40,40));
 	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
+	
 
 	Ball Balle = Ball(Vector2f(400, 300),20);
 
@@ -423,6 +433,20 @@ int main()
 			}
 
 		}
+	
+		if (sf::Joystick::isConnected)
+		{
+			float U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
+			float V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+			if (U > 25 || U < -25 || V>25 || V < -25)
+			{
+				float angle = (atan2(U, V) * 180 / 3.141592654);
+				CharList[0].Viseur.setRotation(-angle);
+			}
+
+		}
+
+		
 		/*if (collision)
 		{
 			printf("Blocked");
@@ -457,7 +481,9 @@ int main()
 		//window.draw(shape);//on demande le dessin d' une forme
 		//drawCurve(window,clock.getElapsedTime().asSeconds());
 		//drawCatmull(window,clock.getElapsedTime().asSeconds());
+		
 		drawTank(window);
+		drawViseur(window);
 		drawBall(window);
 		window.draw(myFpsCounter);
 		
