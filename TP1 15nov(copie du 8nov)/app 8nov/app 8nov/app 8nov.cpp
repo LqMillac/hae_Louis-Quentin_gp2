@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "Ball.h"
+#include "Mur.h"
 
 using namespace sf;
 /*Vector2i Point1(100, 100);
@@ -23,6 +24,7 @@ Vector2i Point6(600, 600);
 Vector2i Point7(700, 700);*/
 static std::vector<Entity> CharList;
 static std::vector<Ball> BallList;
+static std::vector<Mur> WallList;
 sf::Color hsv(int hue, float sat, float val)
 {
 	hue %= 360;
@@ -55,7 +57,7 @@ sf::Color hsv(int hue, float sat, float val)
 static Vector2f shPos(0,0);
 //static Vector2f ballpos(shPos);
 
-int squareSpeed = 3;
+int squareSpeed = 8;
 
 int Left=-1;
 int Right=1;
@@ -74,7 +76,9 @@ Vector2f Beta;
 
 void world(sf::RenderWindow &win)
 {
-	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
+	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds())|| CharList[0].tank.getGlobalBounds().intersects(WallList[0].mur.getGlobalBounds())
+		|| CharList[0].tank.getGlobalBounds().intersects(WallList[1].mur.getGlobalBounds()) || CharList[0].tank.getGlobalBounds().intersects(WallList[2].mur.getGlobalBounds())
+		|| CharList[0].tank.getGlobalBounds().intersects(WallList[3].mur.getGlobalBounds()))
 	{
 		CharList[0].position.x = Beta.x;
 		CharList[0].position.y = Beta.y;
@@ -110,9 +114,6 @@ void world(sf::RenderWindow &win)
 		squareSpeed = 3;
 	}
 
-	
-
-
 }
 void drawTank(sf::RenderWindow &win)
 {
@@ -137,6 +138,13 @@ void drawBall(sf::RenderWindow &win)
 		win.draw(Elem.ball);
 		Elem.ball.move((Elem.U)/10,(Elem.V)/10);
 		//Elem.SetPosition();
+	}
+}
+void drawWALL(sf::RenderWindow &win)
+{
+	for (Mur & Elem : WallList)
+	{
+		win.draw(Elem.mur);
 	}
 }
 /*void Firegun(sf::RenderWindow&win)
@@ -263,17 +271,32 @@ void drawBall(sf::RenderWindow &win)
 int main()
 {
 	
-	Entity Player = Entity(Vector2f(100,100),Vector2f(40,40));
+	Entity Player = Entity(Vector2f(500,500),Vector2f(40,40));
 	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
+
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
 
+
+	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
 	static RectangleShape sh;
+	
 
-	sf::RenderWindow window(sf::VideoMode(800,600), "SFML works!", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(1920,1080), "SFML works!", sf::Style::Default, settings);
+	
+	int height = window.getSize().y;
+	Mur MTop = Mur(Vector2f(0, 0), Vector2f(window.getSize().x, 3));
+	Mur MDown = Mur(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3));
+	Mur MLeft = Mur(Vector2f(0, 0), Vector2f(3, height));
+	Mur MRight = Mur(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height));
+	
+	WallList.push_back(MTop);
+	WallList.push_back(MDown);
+	WallList.push_back(MLeft);
+	WallList.push_back(MRight);
 #pragma region MyRegion
 
 
@@ -497,7 +520,7 @@ int main()
 		//window.draw(shape);//on demande le dessin d' une forme
 		//drawCurve(window,clock.getElapsedTime().asSeconds());
 		//drawCatmull(window,clock.getElapsedTime().asSeconds());
-		
+		drawWALL(window);
 		drawTank(window);
 		drawViseur(window);
 		drawBall(window);
