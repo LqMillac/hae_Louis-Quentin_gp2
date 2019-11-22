@@ -56,9 +56,10 @@ static Vector2f shPos(0,0);
 //static Vector2f ballpos(shPos);
 
 int squareSpeed = 3;
-int BallSpeed = 5;
+
 int Left=-1;
 int Right=1;
+bool Shoot = false;
 
 sf::FloatRect boundingBox;
 Vector2f Alpha;
@@ -134,7 +135,8 @@ void drawBall(sf::RenderWindow &win)
 	for (Ball &Elem : BallList)
 	{
 		win.draw(Elem.ball);
-		Elem.SetPosition();
+		Elem.ball.move((Elem.U)/10,(Elem.V)/10);
+		//Elem.SetPosition();
 	}
 }
 /*void Firegun(sf::RenderWindow&win)
@@ -261,18 +263,12 @@ void drawBall(sf::RenderWindow &win)
 int main()
 {
 	
-	Entity Player = Entity(Vector2f(30,30),Vector2f(40,40));
+	Entity Player = Entity(Vector2f(100,100),Vector2f(40,40));
 	Entity Ennemy= Entity(Vector2f(80, 80),Vector2f(30,30));
-	
-
-	Ball Balle = Ball(Vector2f(400, 300),20);
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
 
-	BallList.push_back(Balle);
-
-	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
 	static RectangleShape sh;
@@ -438,20 +434,40 @@ int main()
 		{
 			float U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 			float V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+			float angle = (atan2(U, V) * 180 / 3.141592654);
 			if (U > 25 || U < -25 || V>25 || V < -25)
 			{
-				float angle = (atan2(U, V) * 180 / 3.141592654);
+
 				CharList[0].Viseur.setRotation(-angle);
+
+
+
+
+				if (Shoot == false && sf::Joystick::isButtonPressed(0,5))
+				{
+
+					Ball Balle = Ball(CharList[0].Viseur.getPosition(), 5);
+					Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
+					Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+					BallList.push_back(Balle);
+
+
+
+				}
+				if (sf::Joystick::isButtonPressed(0, 5))
+				{
+					Shoot = true;
+
+				}
+				else
+				{
+					Shoot = false;
+				}
 			}
+
 
 		}
 
-		
-		/*if (collision)
-		{
-			printf("Blocked");
-			CharList[0].position = Alpha;
-		}*/
 	
 
 		/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))

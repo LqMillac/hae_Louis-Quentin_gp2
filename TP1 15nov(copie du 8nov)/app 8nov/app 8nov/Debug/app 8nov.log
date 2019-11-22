@@ -5,10 +5,10 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(50): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(51): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(52): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(376): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(392): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(409): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(426): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(437): warning C4551: liste d'arguments manquante dans l'appel de fonction
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(443): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(372): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(388): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(405): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(422): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(433): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(437): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
   app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe
