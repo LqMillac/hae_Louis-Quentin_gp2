@@ -51,7 +51,7 @@ sf::Color hsv(int hue, float sat, float val)
 sf::Shader *simpleShader = nullptr;
 sf::Shader *redShader = nullptr;
 
-static Vector2f shPos(0,0);
+static Vector2f shPos(400,450);
 static Vector2f ballpos(shPos);
 
 int squareSpeed = 3;
@@ -60,7 +60,7 @@ int squareSpeed = 3;
 
 void drawMovingSquare(sf::RenderWindow &win)
 {
-	sf::RectangleShape carre(Vector2f(100, 100));
+	sf::RectangleShape carre(Vector2f(52,52));
 	carre.setFillColor(sf::Color::Green);
 	carre.setPosition(shPos);
 	win.draw(carre);
@@ -143,7 +143,7 @@ int main()
 
 	
 	simpleShader = new Shader();
-
+	simpleShader->loadFromFile("res/simple.vert", "res/simple.frag");
 	static sf::Texture*whiteTex = nullptr;
 
 
@@ -247,10 +247,13 @@ int main()
 		
 		
 		window.draw(myFpsCounter);
-
+		float now = clock.getElapsedTime().asSeconds();
+		
+		
 		sf::RectangleShape sh(Vector2f(64, 64));
 		sh.setPosition(50, 50);
 		sh.setTexture(whiteTex);
+		simpleShader->setUniform("time", now);
 		window.draw(sh, simpleShader);
 
 		drawMovingSquare(window);
