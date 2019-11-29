@@ -1,0 +1,15 @@
+﻿  app 8nov.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(42): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(43): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(44): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(45): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(46): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(47): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(77): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(105): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(141): warning C4551: liste d'arguments manquante dans l'appel de fonction
+  app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\Cour7_SHADERS\app 8nov\Debug\app 8nov.exe
