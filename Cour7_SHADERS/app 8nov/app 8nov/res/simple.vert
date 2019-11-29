@@ -3,17 +3,17 @@ uniform float time;
 
 void main()
 {
-   vec4  vertexPos = gl_Vertex;
-   //espace monde x( 0 1280)
+  // vec4  vertexPos = gl_Vertex;
 
-   vertexPos.xy += time * 300;
+
+
 
     // transform the vertex position
-    gl_Position = gl_ModelViewProjectionMatrix * vertexPos;
+   // gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	//gl_Position = gl_Position +cos(time*3)-vertexPos.x;
+	//gl_Position.y = gl_Position.y +sin(time*2)+vertexPos.x*2;
+	
 
-	//espace homogene x( -1 1.0 )
-
-	//gl_Position.xy += time * 300 / 1280.0; 
 
     // transform the texture coordinates
     gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;

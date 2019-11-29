@@ -1,6 +1,7 @@
 // app 8nov.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
 
+
 #include "pch.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -11,118 +12,251 @@
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
-/*Vector2i Point1(100, 100);
-Vector2i Point2(200, 200);
-Vector2i Point3(300, 300);
-Vector2i Point4(400, 400);
-Vector2i Point5(500, 500);
-Vector2i Point6(600, 600);
-Vector2i Point7(700, 700);*/
-sf::Color hsv(int hue, float sat, float val)
-{
-	hue %= 360;
-	while (hue < 0) hue += 360;
 
-	if (sat < 0.f) sat = 0.f;
-	if (sat > 1.f) sat = 1.f;
+class Turtle : public sf::ConvexShape {
+public:
+	sf::Transform m_Trs;
 
-	if (val < 0.f) val = 0.f;
-	if (val > 1.f) val = 1.f;
+	Turtle() : sf::ConvexShape(3) {
+		setFillColor(sf::Color(0x75FF30ff));
+		setOutlineThickness(2);
+		setOutlineColor(sf::Color(0xcd, 0xcd, 0xcd));
 
-	int h = hue / 60;
-	float f = float(hue) / 60 - h;
-	float p = val * (1.f - sat);
-	float q = val * (1.f - sat * f);
-	float t = val * (1.f - sat * (1 - f));
-
-	switch (h)
-	{
-	default:
-	case 0:
-	case 6: return sf::Color(val * 255, t * 255, p * 255);
-	case 1: return sf::Color(q * 255, val * 255, p * 255);
-	case 2: return sf::Color(p * 255, val * 255, t * 255);
-	case 3: return sf::Color(p * 255, q * 255, val * 255);
-	case 4: return sf::Color(t * 255, p * 255, val * 255);
-	case 5: return sf::Color(val * 255, p * 255, q * 255);
+		setPoint(0, Vector2f(0, -24));
+		setPoint(1, Vector2f(-16, 16));
+		setPoint(2, Vector2f(16, 16));
 	}
+
+	void setTransform(sf::Transform trs) {
+		m_Trs = trs;
+	}
+
+};
+
+static sf::Shader * simpleShader = nullptr;
+
+static sf::Texture * whiteTex = nullptr;
+static sf::Texture * gradientMountain = nullptr;
+
+static sf::Transform				s_Initial;
+static std::vector<sf::Transform>	s_Trs;
+static std::vector<Turtle*>			s_Turtles;
+
+
+static void startTransforms() {
+	s_Initial = Transform::Identity;
+	s_Initial.translate(500, 500);
 }
 
-sf::Shader *simpleShader = nullptr;
-sf::Shader *redShader = nullptr;
+static void translateX(float dx) {
+	sf::Transform res;
+	res.translate(dx, 0);
+	s_Trs.push_back(res);
+}
 
-static Vector2f shPos(400,450);
-static Vector2f ballpos(shPos);
+static void translateY(float dy) {
+	sf::Transform res;
+	res.translate(0, dy);
+	s_Trs.push_back(res);
+}
 
-int squareSpeed = 3;
+static void rotate(float degrees) {
+	sf::Transform res;
+	res.rotate(degrees);
+	s_Trs.push_back(res);
+}
 
+static void scaleXY(float dx, float dy) {
+	sf::Transform res;
+	res.scale(dx, dy);
+	s_Trs.push_back(res);
+}
 
+static void scaleXY(float dxy) {
+	sf::Transform res;
+	res.scale(dxy, dxy);
+	s_Trs.push_back(res);
+}
 
-void drawMovingSquare(sf::RenderWindow &win)
+static void scaleX(float dx) {
+	sf::Transform res;
+	res.scale(dx, 0);
+	s_Trs.push_back(res);
+}
+
+static void scaleY(float dy) {
+	sf::Transform res;
+	res.scale(0, dy);
+	s_Trs.push_back(res);
+}
+static void COLOR()
 {
-	sf::RectangleShape carre(Vector2f(52,52));
-	carre.setFillColor(sf::Color::Green);
-	carre.setPosition(shPos);
-	win.draw(carre);
+
+}
+
+static void computeTransform(sf::Transform & result, int step = -1) {
+	sf::Transform inter;
+
+	inter.combine(s_Initial);
+
+	if (step <= -1) {
+		for (sf::Transform t : s_Trs)
+			inter = inter.combine(t);
+	}
+	else {
+		step--;
+		for (sf::Transform t : s_Trs) {
+			inter = inter.combine(t);
+			if (step <= 0)
+				break;
+		}
+	}
+	result = inter;
 }
 
 
-void drawCurve(sf::RenderWindow &win,float now) {
-	sf::VertexArray va(sf::LinesStrip);
-	sf::Color red = sf::Color::Red;
-	sf::Color blue = sf::Color::Blue;
-	int nb = 100;
-	int change = 1;
+static void plotTurtle() {
+	sf::Transform cur;
+	computeTransform(cur, s_Trs.size());
+	Turtle* t = new Turtle();
+	t->setTransform(cur);
+	s_Turtles.push_back(t);
+}
+bool startsWith(const char * s0, const char * s1) {
+	if (*s0 == 0 && *s1 != 0)
+		return false;
+	if (*s1 == 0)
+		return true;
+	if (*s0 != *s1)
+		return false;
+	else
+		return startsWith(s0 + 1, s1 + 1);
+}
+static char data[1024];
+enum TurtleCommand {
+	AV, REC, GROSSI, L45, R45,RET,SPACE
+};
+static std::vector<TurtleCommand> cmd;
+
+
+
+static void executeorder()
+{
 	
-	float stride = 1000 / (nb + 1);
-	int ofsx = 0;
-	for (int i = 0; i < nb+1; ++i)
+	for (TurtleCommand tc : cmd)
 	{
-		double ratio = 1.0*i / nb;
-		double x = ofsx + stride * i;
-		double y = 400;
-		int rayon = 50;
-		if (change == 1)
-		{
-			y += (cos(ratio*8.0 + now * 3) * 120) + cos(now + 2) * 20;
-			change=0;
-		}
-		if (change == 0)
-		{
-			x += (sin(ratio*8.0 - now * 3) * 120) + cos(now - 50) * 100;
-			change=2;
-		}
-		if (change == 2)
-		{
-			x += (cos(ratio*5.0 + now * 3) * 120) + cos(now - 100) * 500;
-			change = 1;
-		}
 		
-		//y += sin(now) * 200;
-		//x += sin(now) * 200;
-		//x =( 500 + cos(ratio * 2 * 3.141569) * rayon) ;
-		//y = (500 + sin(ratio * 2 * 3.141569) * rayon) ;
-			sf::Vertex vertex(Vector2f(x,y), i % 2 == 0 ? blue : red);
-			va.append(vertex);
-	}
-	win.draw(va);
-}
-int main()
-{
-	//std::cout << "Hello World!\n";
+		auto delta = 32;
+		switch (tc)
+		{
+		default:
+			break;
+		case AV:
+			translateY(-delta); plotTurtle();
+			break;
 
+		case REC: translateY(delta); plotTurtle();
+			break;
+
+		case GROSSI: scaleXY(2.0); plotTurtle();
+			break;
+
+		case L45: rotate(-45); plotTurtle();
+			break;
+
+		case R45:rotate(45); plotTurtle();
+			break;
+			
+		case RET: scaleXY(0.5); plotTurtle;
+			break;
+			
+		case SPACE: translateY(-delta * 5); plotTurtle();
+			break;
+		}
+	}
+}
+
+
+
+
+static void ReadScript()
+{
+	FILE * f;
+	fopen_s(&f, "res/ScriptTortue.txt", "r");
+	if (f != nullptr)
+	{
+		memset(data, 0, 1024);
+		fread(data, 2014, 1, f);
+		printf("Read File %s\n", data);
+		fclose(f);
+		
+		char* cur = data;
+		bool doContinue = true;
+		while (doContinue)
+		{
+			if (*cur == 0 || cur == nullptr) break;
+			else
+			{
+				if (startsWith(cur, "AV"))
+				{
+					cmd.push_back(AV);
+				}
+				if (startsWith(cur, "REC"))
+				{
+					cmd.push_back(REC);
+				}
+				if (startsWith(cur, "GROSSI"))
+				{
+					cmd.push_back(GROSSI);
+				}
+				if (startsWith(cur, "L45"))
+				{
+					cmd.push_back(L45);
+				}
+				if (startsWith(cur, "R45"))
+				{
+					cmd.push_back(R45);
+				}
+				if (startsWith(cur, "RET"))
+				{
+					cmd.push_back(RET);
+				}
+				if (startsWith(cur, "SPACE"))
+				{
+					cmd.push_back(SPACE);
+				}
+				else
+				{
+
+				}
+				cur = strstr(cur, " ");
+				if (!cur) break;
+				else
+				{
+					cur++;
+				}
+			}
+		}
+		executeorder();
+
+	}
+	else
+	{
+		printf("Cannot read the file", "res/ScriptTortue.txt");
+	}
+}
+int main() {
+	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
-	static RectangleShape sh;
-	
 
-	sf::RenderWindow window(sf::VideoMode(900,800), "SFML works!", sf::Style::Default, settings);
-	/*sf::CircleShape shape(100.f, (int)(2 * 3.141569 * 100));
-	shape.setPosition(30, 30);
-	shape.setFillColor(sf::Color(0xE884D4ff));
-	shape.setOutlineThickness(4);
-	shape.setOutlineColor(sf::Color(0xFF8A70ff));*/
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Default, settings);
 	window.setVerticalSyncEnabled(true);
+
+	sf::View initialView = window.getDefaultView();
+	sf::View mainView = window.getDefaultView();
+	window.setView(mainView);
+	//ImGui::SFML::Init(window);
 
 	sf::Clock clock;
 
@@ -133,103 +267,112 @@ int main()
 	float fps[4] = { 0.f,0.f,0.f,0.f };
 	int step = 0;
 	sf::Font * font = new sf::Font();
-	
-	if (font->loadFromFile("Fonts/DejaVuSans.ttf") == false) {
+	if (font->loadFromFile("res/DejaVuSans.ttf") == false) {
 		printf("no such font\n");
 	}
 
-	if (!sf::Shader::isAvailable)
-		printf("no shader available\n");
+	if (!sf::Shader::isAvailable())
+		printf("no shader avail\n");
 
-	
 	simpleShader = new Shader();
-	simpleShader->loadFromFile("res/simple.vert", "res/simple.frag");
-	static sf::Texture*whiteTex = nullptr;
-
+	if (!simpleShader->loadFromFile("res/simple.vert", "res/simple.frag"))
+		printf("unable to load shaders\n");
 
 	whiteTex = new Texture();
-	if (!whiteTex->create(1, 1))printf("tex crea failed \n");
+	if (!whiteTex->create(1, 1)) printf("tex crea failed\n");
 	whiteTex->setSmooth(true);
 	unsigned int col = 0xffffffff;
 	whiteTex->update((const sf::Uint8*)&col, 1, 1, 0, 0);
 
-	
+	gradientMountain = new Texture();
+	if (!gradientMountain->loadFromFile("res/mountain.png")) {
+		printf("unable to load tex\n");
+	}
 
 	sf::Text myFpsCounter;
 	int every = 0;
+
+	sf::Clock deltaClock;
+
+	double winWidth = window.getSize().x;
+	double winHeight = window.getSize().y;
+
+	int showSegment = 0;
+
+	startTransforms();
+	plotTurtle();
+
 	while (window.isOpen())//on passe tout le temps DEBUT DE LA FRAME 
 	{
 		sf::Event event;//recup les evenement clavier/pad
 		frameStart = clock.getElapsedTime();
-		while (window.pollEvent(event))
-		{
+		window.setView(initialView);
+
+		window.clear();
+		while (window.pollEvent(event)) {
+
+			//	ImGui::SFML::ProcessEvent(event);
+
+			Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(window));
+
 			switch (event.type) {
-			case sf::Event::KeyReleased:
 
-				if (event.key.code == sf::Keyboard::I)
-					printf("instant fps %f\n", fps[(step - 1) % 4]);
-
-				if (event.key.code == sf::Keyboard::F)
-					printf("fps %f\n", 0.25f*(fps[0] + fps[1] + fps[2] + fps[3]));
-
+			case sf::Event::Resized:
+				initialView.setSize({
+								   static_cast<float>(event.size.width),
+								   static_cast<float>(event.size.height)
+					});
+				window.setView(initialView);
 				break;
 
+			case sf::Event::KeyReleased: {
+
+				if (event.key.code == sf::Keyboard::Space) {
+					startTransforms();
+
+					sf::Transform trs;
+					computeTransform(trs);
+
+					for (Turtle * t : s_Turtles) delete t;
+					s_Turtles.clear();
+
+					Turtle* t = new Turtle();
+					t->setTransform(trs);
+					s_Turtles.push_back(t);
+				}
+
+				auto delta = 32;
+
+				if (event.key.code == sf::Keyboard::Up) { translateY(-delta);	   plotTurtle(); }
+				if (event.key.code == sf::Keyboard::Down) { translateY(delta);	   plotTurtle(); }
+
+				if (event.key.code == sf::Keyboard::Left) { rotate(-45);			   plotTurtle(); }
+				if (event.key.code == sf::Keyboard::Right) { rotate(45);			   plotTurtle(); }
+
+				if (event.key.code == sf::Keyboard::Add) { scaleXY(2.0);			   plotTurtle(); }
+				if (event.key.code == sf::Keyboard::Subtract) { scaleXY(0.5);			   plotTurtle(); }
+
+				if (event.key.code == sf::Keyboard::A)
+				{
+					ReadScript();
+				}
+				break;
+			}
+
+			case sf::Event::KeyPressed:
+
+				break;
 
 			case sf::Event::Closed:
 				window.close();
 				break;
-			default:
-				break;
+
 			}
 		}
-		sf::Vector2i globalPosition = sf::Mouse::getPosition();
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
-		{
-			Point1 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2))
-		{
-			Point2 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F3))
-		{
-			Point3 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F4))
-		{
-			Point4 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5))
-		{
-			Point5 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F6))
-		{
-			Point6 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F7))
-		{
-			Point7 = globalPosition;
-		}*/
-		//--------------------------------------------------------------
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			shPos.y -= squareSpeed;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			shPos.y += squareSpeed;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			shPos.x -= squareSpeed;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			shPos.x += squareSpeed;
-		}
 
+		sf::Time dt = deltaClock.restart();
+		//ImGui::SFML::Update(window, dt);
 
 		myFpsCounter.setPosition(8, 8);
 		myFpsCounter.setFillColor(sf::Color::Red);
@@ -241,31 +384,25 @@ int main()
 		}
 		every--;
 
-		window.clear();//nettoie la frame
-		//window.draw(shape);//on demande le dessin d' une forme
-		//drawCurve(window,clock.getElapsedTime().asSeconds());
-		
-		
 		window.draw(myFpsCounter);
-		float now = clock.getElapsedTime().asSeconds();
-		
-		
-		sf::RectangleShape sh(Vector2f(64, 64));
-		sh.setPosition(50, 50);
-		sh.setTexture(whiteTex);
-		simpleShader->setUniform("time", now);
-		window.draw(sh, simpleShader);
 
-		drawMovingSquare(window);
-	
+		for (Turtle * t : s_Turtles) {
+			RenderStates rs;
+			rs.transform = t->m_Trs;
+			window.draw(*t, rs);
+		}
+
+
+		//ImGui::SFML::Render(window);
 		window.display();//ca dessine et ca attend la vsync
-		
 
 		fps[step % 4] = 1.0f / (frameStart - prevFrameStart).asSeconds();
 		prevFrameStart = frameStart;
 
 		step++;
 	}
+
+	//ImGui::SFML::Shutdown();
 
 	return 0;
 }
