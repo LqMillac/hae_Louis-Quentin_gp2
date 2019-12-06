@@ -62,6 +62,7 @@ int squareSpeed = 8;
 int Left=-1;
 int Right=1;
 int BallLife = 0;
+int TankLife = 0;
 bool Shoot = false;
 bool Shoot2 = false;
 
@@ -73,15 +74,7 @@ float V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
 float angle = (atan2(U, V) * 180 / 3.141592654);
 
 
-
-bool collision = false;
-bool collisionR = false;
-bool collisionL = false;
-bool collisionU = false;
-bool collisionD = false;
 Vector2f Beta;
-
-
 
 void world(sf::RenderWindow &win)
 {
@@ -163,7 +156,9 @@ void world(sf::RenderWindow &win)
 				BallList[i].BallLife += 1;
 			}
 		}
+	
 	}
+
 
 }
 void drawTank(sf::RenderWindow &win)
@@ -172,6 +167,7 @@ void drawTank(sf::RenderWindow &win)
 	{
 		win.draw(Elem.tank);
 		win.draw(Elem.Viseur);
+		
 		Elem.SetPosition();
 	}
 }
@@ -183,7 +179,7 @@ void drawBall(sf::RenderWindow &win)
 		win.draw(Elem.ball);
 		Elem.ball.move((Elem.U)/10,(Elem.V)/10);
 
-		//Elem.SetPosition();
+		
 	}
 }
 void drawWALL(sf::RenderWindow &win)
@@ -194,130 +190,8 @@ void drawWALL(sf::RenderWindow &win)
 	}
 }
 
-
-
-/*void drawMovingSquare(sf::RenderWindow &win)
-{
-	sf::RectangleShape carre(Vector2f(50,50));
-	carre.setFillColor(sf::Color::Magenta);
-	carre.setPosition(shPos);
-	win.draw(carre);
-}*/
-/*void drawCatmull(sf::RenderWindow &win, float now) {
-	sf::VertexArray va(sf::LineStrip);
-	sf::Color red = sf::Color::Red;
-	sf::Color blue = sf::Color::Blue;
-	int nb = 320;
-	
-	float stride = 1280.0 / nb;
-
-	std::vector<Vector2f> points;
-
-	for (int j = 0; j < 8; ++j) {
-		/*Vector2f v(j * 100, j * 100);
-		if (j == 0)v.x += 50;
-		if (j == 3)v.x += 350;
-		points.push_back(v);
-		Vector2f v(j * 100, j * 100);
-		if (j == 1) { v.x = Point1.x; v.y = Point1.y; }
-		if (j == 2) { v.x = Point2.x; v.y = Point2.y; }
-		if (j == 3) { v.x = Point3.x; v.y = Point3.y; }
-		if (j == 4) { v.x = Point4.x; v.y = Point4.y; }
-		if (j == 5) { v.x = Point5.x; v.y = Point5.y; }
-		if (j == 6) { v.x = Point6.x; v.y = Point6.y; }
-		if (j == 7) { v.x = Point7.x; v.y = Point7.y; }
-		
-		points.push_back(v);
-	}
-
-		sf::CircleShape shape(20.f, (int)(2 * 3.141569 * 100));
-		shape.setOrigin(Vector2f(16, 16));
-		shape.setFillColor(sf::Color::Magenta);
-		
-		
-	for (int i = 0; i < nb + 1; ++i) {
-		double ratio = 1.0 * i / nb;
-		double x = 0.0;
-		double y = 0.0;
-		
-		sf::Color c = hsv(ratio * 360, 0.8, 0.8);
-
-		Vector2f pos = Lib::plot2(ratio, points);
-		x = pos.x;
-		y = pos.y;
-
-		sf::Vertex vertex(Vector2f(x, y), c);
-		va.append(vertex);
-		
-	}
-	//float cRatio = (fmodf(now, 2.0f) / 2.0f);
-	static float cRatio = 0.0;
-	static bool reverse = true;
-	//Vector2f pos = Lib::plot2(cRatio,points);
-	Vector2f pos = Lib::plot2(reverse?cRatio:(1-cRatio),points);
-	shape.setPosition(pos);
-	cRatio += 0.001;
-	if (cRatio > 1.0) {
-		cRatio = 0.0;
-		reverse = !reverse;
-	}
-	
-
-	//win.draw(va);
-	//win.draw(shape);
-}*/
-
-/*void drawCurve(sf::RenderWindow &win,float now) {
-	sf::VertexArray va(sf::LinesStrip);
-	sf::Color red = sf::Color::Red;
-	sf::Color blue = sf::Color::Blue;
-	int nb = 100;
-	int change = 1;
-	
-	float stride = 1000 / (nb + 1);
-	int ofsx = 0;
-	for (int i = 0; i < nb+1; ++i)
-	{
-		double ratio = 1.0*i / nb;
-		double x = ofsx + stride * i;
-		double y = 400;
-		int rayon = 50;
-		if (change == 1)
-		{
-			y += (cos(ratio*8.0 + now * 3) * 120) + cos(now + 2) * 20;
-			change=0;
-		}
-		if (change == 0)
-		{
-			x += (sin(ratio*8.0 - now * 3) * 120) + cos(now - 50) * 100;
-			change=2;
-		}
-		if (change == 2)
-		{
-			x += (cos(ratio*5.0 + now * 3) * 120) + cos(now - 100) * 500;
-			change = 1;
-		}
-		
-		//y += sin(now) * 200;
-		//x += sin(now) * 200;
-		//x =( 500 + cos(ratio * 2 * 3.141569) * rayon) ;
-		//y = (500 + sin(ratio * 2 * 3.141569) * rayon) ;
-			sf::Vertex vertex(Vector2f(x,y), i % 2 == 0 ? blue : red);
-			va.append(vertex);
-	}
-	win.draw(va);
-}*/
 int main()
 {
-	
-	Entity Player = Entity(Vector2f(150,800),Vector2f(65,65));
-	Entity Ennemy= Entity(Vector2f(1200,100),Vector2f(65,65));
-
-
-	CharList.push_back(Player);
-	CharList.push_back(Ennemy);
-
-
 	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 2;
@@ -351,6 +225,17 @@ int main()
 	float fps[4] = { 0.f,0.f,0.f,0.f };
 	int step = 0;
 	sf::Font * font = new sf::Font();
+	sf::Texture texture;
+	if (!texture.loadFromFile("res/tankBleu.png"))
+		printf("pasTank");
+
+	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65),&texture);
+	Entity Ennemy = Entity(Vector2f(1200, 100), Vector2f(65, 65), &texture);
+
+	CharList.push_back(Player);
+	CharList.push_back(Ennemy);
+
+	
 	
 	if (font->loadFromFile("Fonts/DejaVuSans.ttf") == false) {
 		printf("no such font\n");
@@ -386,34 +271,6 @@ int main()
 		}
 		world(window);
 		sf::Vector2i globalPosition = sf::Mouse::getPosition();
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
-		{
-			Point1 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2))
-		{
-			Point2 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F3))
-		{
-			Point3 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F4))
-		{
-			Point4 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5))
-		{
-			Point5 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F6))
-		{
-			Point6 = globalPosition;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F7))
-		{
-			Point7 = globalPosition;
-		}*/
 		//-------------------------------------------------------------
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
@@ -434,32 +291,32 @@ int main()
 		if (sf::Joystick::isConnected(0))
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-			if (x > 25 /*collisionL == false*/)
+			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
+			
+		
+			if (x > 25 )
 			{
-				//Alpha = CharList[0].position;
+				
 				CharList[0].position.x += squareSpeed;
-				/*if (collision == true)
-				{
-					collisionL = true;
-					squareSpeed = 20;
-				}
-				collisionL = false;*/
+				CharList[0].tank.setRotation(-angle);
+			
 			}
 			
 		}
 		if (sf::Joystick::isConnected(0))
 		{
 			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-			if (x < -25 /*collisionR == false*/)
+			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
+			
+			
+			if (x < -25)
 			{
-				//Alpha = CharList[0].position;
+				
 				CharList[0].position.x -= squareSpeed;
-				/*if (collision == true)
-				{
-					collisionR = true;
-					squareSpeed = 20;
-				}
-				collisionR = false;*/
+				CharList[0].tank.setRotation(-angle);
+			
 
 			}
 
@@ -467,16 +324,16 @@ int main()
 		if (sf::Joystick::isConnected(0))
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-			if (y > 25 /*collisionU ==false*/)
+			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
+		
+			
+			if (y > 25 )
 			{
-				//Alpha = CharList[0].position;
+				
 				CharList[0].position.y += squareSpeed;
-				/*if (collision == true)
-				{
-					collisionU = true;
-					squareSpeed = 20;
-				}
-				collisionU = false;*/
+				CharList[0].tank.setRotation(-angle);
+			
 
 			}
 
@@ -484,9 +341,12 @@ int main()
 		if (sf::Joystick::isConnected(0))
 		{
 			float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+			float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+			
+			float angle = (atan2(x, y) * 180 / 3.141592654);
 			if (y < -25)
 			{
-				Alpha = CharList[0].position;
+				CharList[0].tank.setRotation(-angle);
 				CharList[0].position.y -= squareSpeed;
 			}
 
@@ -508,7 +368,7 @@ int main()
 				if (Shoot2 == false && sf::Joystick::isButtonPressed(0,5))
 				{
 
-					Ball Balle = Ball(CharList[0].Viseur.getPosition(), 10);
+					Ball Balle = Ball(Vector2f(CharList[0].Viseur.getPosition().x-5, CharList[0].Viseur.getPosition().y), 10);
 					Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
 					Balle.BallLife = 0;
@@ -590,6 +450,7 @@ int main()
 			{
 
 				CharList[1].Viseur.setRotation(-angle);
+				CharList[1].Viseur.setRotation(-angle);
 
 
 
@@ -597,7 +458,7 @@ int main()
 				if (Shoot == false && sf::Joystick::isButtonPressed(1, 5))
 				{
 
-					Ball Balle = Ball(CharList[1].Viseur.getPosition(), 10);
+					Ball Balle = Ball(Vector2f(CharList[1].Viseur.getPosition().x, CharList[1].Viseur.getPosition().y), 10);
 					Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
 					Balle.BallLife = 0;
@@ -651,9 +512,9 @@ int main()
 		//drawCurve(window,clock.getElapsedTime().asSeconds());
 		//drawCatmull(window,clock.getElapsedTime().asSeconds());
 		drawWALL(window);
-		drawTank(window);
-		//drawViseur(window);
 		drawBall(window);
+		drawTank(window);
+	
 		window.draw(myFpsCounter);
 		
 

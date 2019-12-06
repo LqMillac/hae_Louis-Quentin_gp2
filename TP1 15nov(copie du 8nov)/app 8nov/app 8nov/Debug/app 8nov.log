@@ -5,10 +5,10 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(52): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(53): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(54): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(73): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(89): warning C4018: '<' : incompatibilité signed/unsigned
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(111): warning C4018: '<' : incompatibilité signed/unsigned
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(330): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(74): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(82): warning C4018: '<' : incompatibilité signed/unsigned
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(104): warning C4018: '<' : incompatibilité signed/unsigned
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(204): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -17,7 +17,7 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(331): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(205): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -26,12 +26,12 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(332): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(206): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(333): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(207): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -40,11 +40,15 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(333): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(207): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(499): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(588): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(295): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(311): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(328): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(346): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(359): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(448): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
   app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe

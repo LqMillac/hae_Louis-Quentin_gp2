@@ -17,6 +17,7 @@ public:
 		position = pos;
 		ball.setFillColor(sf::Color::Red);
 		ball.setPosition(pos);
+		ball.setOrigin((size/2),(size/2));
 
 
 	}
