@@ -226,11 +226,22 @@ int main()
 	int step = 0;
 	sf::Font * font = new sf::Font();
 	sf::Texture texture;
-	if (!texture.loadFromFile("res/tankBleu.png"))
+	sf::Texture textureViseur;
+	sf::Texture textureR;
+	sf::Texture textureViseurR;
+	if (!texture.loadFromFile("res/tank sans canon bleu.png"))
+		printf("pasTank");
+	if (!textureViseur.loadFromFile("res/canon tank bleu.png"))
+		printf("pasTank");
+	if (!textureR.loadFromFile("res/tank sans canon rouge.png"))
+		printf("pasTank");
+	if (!textureViseurR.loadFromFile("res/canon tank rouge.png"))
 		printf("pasTank");
 
-	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65),&texture);
-	Entity Ennemy = Entity(Vector2f(1200, 100), Vector2f(65, 65), &texture);
+	
+
+	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65),&texture,&textureViseur);
+	Entity Ennemy = Entity(Vector2f(1200, 100), Vector2f(65, 65), &textureR,&textureViseurR);
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
@@ -395,25 +406,24 @@ int main()
 		if (sf::Joystick::isConnected(1))
 		{
 			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-			if (x > 25 /*collisionL == false*/)
+			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
+			if (x > 25 )
 			{
-				//Alpha = CharList[0].position;
+				CharList[1].tank.setRotation(-angle);
 				CharList[1].position.x += squareSpeed;
-				/*if (collision == true)
-				{
-					collisionL = true;
-					squareSpeed = 20;
-				}
-				collisionL = false;*/
+				
 			}
 
 		}
 		if (sf::Joystick::isConnected(1))
 		{
 			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-			if (x < -25 /*collisionR == false*/)
+			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
+			if (x < -25 )
 			{
-				//Alpha = CharList[0].position;
+				CharList[1].tank.setRotation(-angle);
 				CharList[1].position.x -= squareSpeed;
 			
 			}
@@ -421,10 +431,12 @@ int main()
 		}
 		if (sf::Joystick::isConnected(1))
 		{
+			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
 			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
 			if (y > 25 )
 			{
-				
+				CharList[1].tank.setRotation(-angle);
 				CharList[1].position.y += squareSpeed;
 			
 			}
@@ -432,10 +444,12 @@ int main()
 		}
 		if (sf::Joystick::isConnected(1))
 		{
+			float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
 			float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+			float angle = (atan2(x, y) * 180 / 3.141592654);
 			if (y < -25)
 			{
-				Alpha = CharList[1].position;
+				CharList[1].tank.setRotation(-angle);
 				CharList[1].position.y -= squareSpeed;
 			}
 
