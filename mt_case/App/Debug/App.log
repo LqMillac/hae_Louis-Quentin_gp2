@@ -1,0 +1,20 @@
+﻿  Entity.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\fadingparticle.h(18): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(108): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(171): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(228): warning C4065: l'instruction switch contient 'default' mais aucune étiquette 'case'
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(234): warning C4065: l'instruction switch contient 'default' mais aucune étiquette 'case'
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(247): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(248): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(253): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(254): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(259): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(260): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(265): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(266): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\mt_case\app\entity.cpp(307): warning C4715: 'Entity::getStateName' : les chemins de contrôle ne retournent pas tous une valeur
+  App.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\mt_case\App\Debug\App.exe
