@@ -14,11 +14,12 @@ public:
 	float V;
 	Ball(sf::Vector2f pos,float size,sf::Texture *tex)
 	{
-		ball.setRadius(size);
+		ball.setRadius(size+7);
 		position = pos;
 		//ball.setFillColor(sf::Color::Red);
 		ball.setPosition(pos);
-		ball.setOrigin((size/2),(size/2));
+		ball.setOrigin(ball.getRadius(), ball.getRadius());
+		
 		texture = tex;
 		if (texture)
 		{

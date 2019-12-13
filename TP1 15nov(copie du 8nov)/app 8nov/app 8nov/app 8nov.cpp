@@ -25,6 +25,7 @@ Vector2i Point7(700, 700);*/
 static std::vector<Entity> CharList;
 static std::vector<Ball> BallList;
 static std::vector<Mur> WallList;
+
 sf::Color hsv(int hue, float sat, float val)
 {
 	hue %= 360;
@@ -178,6 +179,7 @@ void drawBall(sf::RenderWindow &win)
 	{
 		win.draw(Elem.ball);
 		Elem.ball.move((Elem.U)/10,(Elem.V)/10);
+		Elem.ball.rotate(7);
 
 		
 	}
@@ -194,17 +196,23 @@ int main()
 {
 	
 	sf::ContextSettings settings;
+	
+	
 	settings.antialiasingLevel = 2;
 	static RectangleShape sh;
 	
 
 	sf::RenderWindow window(sf::VideoMode(1920,1080), "SFML works!", sf::Style::Default, settings);
+
+	sf::Texture textureWall;
+	if (!textureWall.loadFromFile("res/wall.png"))
+		printf("pas mur");
 	
 	int height = window.getSize().y;
-	Mur MTop = Mur(Vector2f(0, 0), Vector2f(window.getSize().x, 3));
-	Mur MDown = Mur(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3));
-	Mur MLeft = Mur(Vector2f(0, 0), Vector2f(3, height));
-	Mur MRight = Mur(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height));
+	Mur MTop = Mur(Vector2f(0, 0), Vector2f(window.getSize().x,10),&textureWall);
+	Mur MDown = Mur(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3), &textureWall);
+	Mur MLeft = Mur(Vector2f(0, 0), Vector2f(10, height),&textureWall);
+	Mur MRight = Mur(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height), &textureWall);
 	
 	WallList.push_back(MTop);
 	WallList.push_back(MDown);
@@ -230,7 +238,14 @@ int main()
 	sf::Texture textureR;
 	sf::Texture textureViseurR;
 	sf::Texture textureBall;
+	sf::Texture textureBall2;
+	
+	
+
+	
 	if (!textureBall.loadFromFile("res/fireball.png"))
+		printf("pas ball");
+	if (!textureBall2.loadFromFile("res/fireball2.png"))
 		printf("pas ball");
 	if (!texture.loadFromFile("res/tank sans canon bleu.png"))
 		printf("pasTank");
@@ -383,8 +398,10 @@ int main()
 				{
 
 					Ball Balle = Ball(Vector2f(CharList[0].Viseur.getPosition().x-5, CharList[0].Viseur.getPosition().y), 10,&textureBall);
+
 					Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+					
 					Balle.BallLife = 0;
 					BallList.push_back(Balle);
 					
@@ -475,7 +492,7 @@ int main()
 				if (Shoot == false && sf::Joystick::isButtonPressed(1, 5))
 				{
 
-					Ball Balle = Ball(Vector2f(CharList[1].Viseur.getPosition().x, CharList[1].Viseur.getPosition().y), 10,&textureBall);
+					Ball Balle = Ball(Vector2f(CharList[1].Viseur.getPosition().x, CharList[1].Viseur.getPosition().y), 10,&textureBall2);
 					Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
 					Balle.BallLife = 0;
