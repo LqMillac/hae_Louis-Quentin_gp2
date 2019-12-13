@@ -1,4 +1,5 @@
-﻿  app 8nov.cpp
+﻿  Ball.cpp
+  app 8nov.cpp
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(49): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(50): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
 c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(51): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
@@ -45,14 +46,15 @@ c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8n
           [
               T=float
           ]
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(306): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(322): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(339): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(357): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(370): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(410): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(423): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(436): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(449): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(462): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(309): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(325): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(342): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(360): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(373): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(413): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(426): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(439): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(452): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(465): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours...
   app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe

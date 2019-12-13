@@ -229,6 +229,9 @@ int main()
 	sf::Texture textureViseur;
 	sf::Texture textureR;
 	sf::Texture textureViseurR;
+	sf::Texture textureBall;
+	if (!textureBall.loadFromFile("res/fireball.png"))
+		printf("pas ball");
 	if (!texture.loadFromFile("res/tank sans canon bleu.png"))
 		printf("pasTank");
 	if (!textureViseur.loadFromFile("res/canon tank bleu.png"))
@@ -379,7 +382,7 @@ int main()
 				if (Shoot2 == false && sf::Joystick::isButtonPressed(0,5))
 				{
 
-					Ball Balle = Ball(Vector2f(CharList[0].Viseur.getPosition().x-5, CharList[0].Viseur.getPosition().y), 10);
+					Ball Balle = Ball(Vector2f(CharList[0].Viseur.getPosition().x-5, CharList[0].Viseur.getPosition().y), 10,&textureBall);
 					Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
 					Balle.BallLife = 0;
@@ -472,7 +475,7 @@ int main()
 				if (Shoot == false && sf::Joystick::isButtonPressed(1, 5))
 				{
 
-					Ball Balle = Ball(Vector2f(CharList[1].Viseur.getPosition().x, CharList[1].Viseur.getPosition().y), 10);
+					Ball Balle = Ball(Vector2f(CharList[1].Viseur.getPosition().x, CharList[1].Viseur.getPosition().y), 10,&textureBall);
 					Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
 					Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
 					Balle.BallLife = 0;
