@@ -10,6 +10,7 @@ public:
 	sf::CircleShape BallCollider;
 	sf::Texture *texture;
 	int BallLife;
+	bool spawned = true;
 	float U;
 	float V;
 	Ball(sf::Vector2f pos,float size,sf::Texture *tex)

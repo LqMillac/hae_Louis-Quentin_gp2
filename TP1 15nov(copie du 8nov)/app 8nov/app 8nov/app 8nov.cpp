@@ -66,6 +66,9 @@ int BallLife = 0;
 int TankLife = 0;
 bool Shoot = false;
 bool Shoot2 = false;
+Vector2f Beta;
+Vector2f Beta2;
+sf::Text VictoryText;
 
 sf::FloatRect boundingBox;
 Vector2f Alpha;
@@ -76,91 +79,147 @@ float angle = (atan2(U, V) * 180 / 3.141592654);
 
 
 Vector2f Beta;
+void Startwin(sf::RenderWindow &win, int NPlayer)
+{
+	std::string Player;
+	VictoryText.setFillColor(sf::Color::Red);
+	VictoryText.setCharacterSize(100);
+	if (NPlayer == 1) Player = "Bleu";
+	if (NPlayer == 2) Player = "Rouge";
+	VictoryText.setString("Victoire du joueur " + Player);
+	FloatRect Alpha = VictoryText.getLocalBounds();
+	VictoryText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
+	VictoryText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.1f));
+	int i = 0;
+}
 
 void world(sf::RenderWindow &win)
 {
-	
+
 	for (int i = 0; i < WallList.size(); i++)
 	{
-		if (CharList[0].tank.getGlobalBounds().intersects(WallList[i].mur.getGlobalBounds()))
+		if (CharList.size() > 1)
+		{
+			if (CharList[0].tank.getGlobalBounds().intersects(WallList[i].mur.getGlobalBounds()))
+			{
+				CharList[0].position.x = Beta.x;
+				CharList[0].position.y = Beta.y;
+				//squareSpeed = 0;
+			}
+			if (CharList[1].tank.getGlobalBounds().intersects(WallList[i].mur.getGlobalBounds()))
+			{
+				CharList[1].position.x = Beta2.x;
+				CharList[1].position.y = Beta2.y;
+			}
+		}
+	}
+	if (CharList.size() > 1)
+	{
+		if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
 		{
 			CharList[0].position.x = Beta.x;
 			CharList[0].position.y = Beta.y;
+			CharList[1].position.x = Beta2.x;
+			CharList[1].position.y = Beta2.y;
 			squareSpeed = 0;
 		}
-	}
-	if (CharList[0].tank.getGlobalBounds().intersects(CharList[1].tank.getGlobalBounds()))
-	{
-		CharList[0].position.x = Beta.x;
-		CharList[0].position.y = Beta.y;
-		squareSpeed = 0;
-	}
-	else
-	{
-		Beta.x = CharList[0].position.x;
-		Beta.y = CharList[0].position.y;
-		squareSpeed = 3;
-	}
+		else
+		{
+			Beta.x = CharList[0].position.x;
+			Beta.y = CharList[0].position.y;
+			Beta2.x = CharList[1].position.x;
+			Beta2.y = CharList[1].position.y;
+			squareSpeed = 3;
+		}
+		for (int i = 0; i < BallList.size(); i++)
+		{
+			if (WallList[0].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+			{
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].V = -BallList[i].V;
+				if (BallList[i].BallLife == 1)
+				{
+					BallList.erase(BallList.begin() + i);
+					break;
+				}
+				if (BallList[i].BallLife == 0)
+				{
+					BallList[i].BallLife += 1;
+				}
+			}
+			if (WallList[1].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+			{
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].V = -BallList[i].V;
+				if (BallList[i].BallLife == 1)
+				{
+					BallList.erase(BallList.begin() + i);
+					break;
+				}
+				if (BallList[i].BallLife == 0)
+				{
+					BallList[i].BallLife += 1;
+				}
+			}
+			if (WallList[2].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+			{
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].U = -BallList[i].U;
+				if (BallList[i].BallLife == 1)
+				{
+					BallList.erase(BallList.begin() + i);
+					break;
+				}
+				if (BallList[i].BallLife == 0)
+				{
+					BallList[i].BallLife += 1;
+				}
+			}
+			if (WallList[3].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+			{
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+				BallList[i].U = -BallList[i].U;
+				if (BallList[i].BallLife == 1)
+				{
+					BallList.erase(BallList.begin() + i);
+					break;
+				}
+				if (BallList[i].BallLife == 0)
+				{
+					BallList[i].BallLife += 1;
+				}
+			}
+			if (CharList.size() > 1)
+			{
+				if (!CharList[0].tank.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()) && !CharList[1].tank.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+				{
+					if (BallList[i].spawned == true)
+					{
+						BallList[i].spawned = false;
+					}
+				}
+				if (CharList[0].tank.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+				{
+					if (BallList[i].spawned == false)
+					{
+						printf("Hello");
+						Startwin(win, 2);
+						CharList.erase(CharList.begin());
+					}
+				}
 
-	for (int i = 0; i < BallList.size(); i++)
-	{
-		
-		if (WallList[0].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
-		{
-			BallList[i].V = -BallList[i].V;
-			if (BallList[i].BallLife == 1)
-			{
-				BallList.erase(BallList.begin() + i);
-				break;
-			}
-			if (BallList[i].BallLife == 0)
-			{
-				BallList[i].BallLife += 1;
+				if (CharList[1].tank.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
+				{
+					if (BallList[i].spawned == false)
+					{
+						Startwin(win, 1);
+						CharList.erase(CharList.begin() + 1);
+					}
+				}
 			}
 		}
-		if (WallList[1].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
-		{
-			BallList[i].V = -BallList[i].V;
-			if (BallList[i].BallLife == 1)
-			{
-				BallList.erase(BallList.begin() + i);
-				break;
-			}
-			if (BallList[i].BallLife == 0)
-			{
-				BallList[i].BallLife += 1;
-			}
-		}
-		if (WallList[2].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
-		{
-			BallList[i].U = -BallList[i].U;
-			if (BallList[i].BallLife == 1)
-			{
-				BallList.erase(BallList.begin() + i);
-				break;
-			}
-			if (BallList[i].BallLife == 0)
-			{
-				BallList[i].BallLife += 1;
-			}
-		}
-		if (WallList[3].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
-		{
-			BallList[i].U = -BallList[i].U;
-			if (BallList[i].BallLife == 1)
-			{
-				BallList.erase(BallList.begin() + i);
-				break;
-			}
-			if (BallList[i].BallLife == 0)
-			{
-				BallList[i].BallLife += 1;
-			}
-		}
-	
+
 	}
-
-
 }
 void drawTank(sf::RenderWindow &win)
 {
