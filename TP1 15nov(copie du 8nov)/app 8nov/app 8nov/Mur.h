@@ -1,20 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-class Mur
+class Wall
 {
 public:
-	sf::RectangleShape mur;
-	sf::RectangleShape MurCollider;
 	sf::Vector2f position;
+	sf::RectangleShape mur;
 	sf::Texture *texture;
-
-	Mur(sf::Vector2f pos,sf::Vector2f size,sf::Texture *tex)
+	Wall(sf::Vector2f pos, sf::Vector2f size, sf::Texture *tex)
 	{
-
-		MurCollider.setSize(size);
 		mur.setSize(size);
 		position = pos;
-		//mur.setFillColor(sf::Color::Green);
+		//mur.setFillColor(sf::Color::Magenta);
 		mur.setPosition(pos);
 		texture = tex;
 		if (texture)
@@ -22,12 +18,10 @@ public:
 			mur.setTexture(texture);
 		}
 
-	}
+	};
 	void SetPosition()
 	{
 		mur.setPosition(position);
-		
 	}
-	
 };
 

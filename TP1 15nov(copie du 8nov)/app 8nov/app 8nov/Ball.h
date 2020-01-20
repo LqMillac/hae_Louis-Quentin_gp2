@@ -1,40 +1,40 @@
+
 #pragma once
 #include <SFML/Graphics.hpp>
 class Ball
 {
-	
-	
+
+
 public:
 	sf::Vector2f position;
+	sf::Vector2f Prepos;
 	sf::CircleShape ball;
 	sf::CircleShape BallCollider;
 	sf::Texture *texture;
 	int BallLife;
 	bool spawned = true;
-	float U;
-	float V;
-	Ball(sf::Vector2f pos,float size,sf::Texture *tex)
+	float U, V;
+	Ball(sf::Vector2f pos, float size, sf::Texture* tex)
 	{
-		ball.setRadius(size+7);
+
+		ball.setRadius(size);
+		ball.setOrigin(sf::Vector2f(size / 2, size / 2));
 		position = pos;
 		//ball.setFillColor(sf::Color::Red);
 		ball.setPosition(pos);
-		ball.setOrigin(ball.getRadius(), ball.getRadius());
-		
+
 		texture = tex;
 		if (texture)
 		{
 			ball.setTexture(texture);
 
 		}
-
-
 	}
 	void SetPosition()
 	{
 		ball.setPosition(position);
 	}
-
-	
 };
+
+
 
