@@ -12,61 +12,55 @@
 #include "Entity.h"
 #include "Ball.h"
 #include "Mur.h"
-#include <Box2D/Box2D.h>
+//#include <Box2D/Box2D.h>
 #include <iostream>
 
 using namespace sf;
 static std::vector<Entity> CharList;
 static std::vector<Ball> BallList;
 static std::vector<Wall> WallList;
-sf::Color hsv(int hue, float sat, float val)
-{
-	hue %= 360;
-	while (hue < 0) hue += 360;
 
-	if (sat < 0.f) sat = 0.f;
-	if (sat > 1.f) sat = 1.f;
-
-	if (val < 0.f) val = 0.f;
-	if (val > 1.f) val = 1.f;
-
-	int h = hue / 60;
-	float f = float(hue) / 60 - h;
-	float p = val * (1.f - sat);
-	float q = val * (1.f - sat * f);
-	float t = val * (1.f - sat * (1 - f));
-
-	switch (h)
-	{
-	default:
-	case 0:
-	case 6: return sf::Color(val * 255, t * 255, p * 255);
-	case 1: return sf::Color(q * 255, val * 255, p * 255);
-	case 2: return sf::Color(p * 255, val * 255, t * 255);
-	case 3: return sf::Color(p * 255, q * 255, val * 255);
-	case 4: return sf::Color(t * 255, p * 255, val * 255);
-	case 5: return sf::Color(val * 255, p * 255, q * 255);
-	}
-}
 static Vector2f shPos(0, 0);
 static int height;
 static int width;
-//static Vector2f ballpos(shPos);
+
 
 int squareSpeed = 3;
 int BallSpeed = 5;
-int Left = -1;
-int Right = 1;
+
+
 int ScoreBleu = 0;
 int ScoreRouge = 0;
+bool EndGame = false;
+bool BlueWin = false;
+bool RedWin = false;
+bool Pause = false;
+
 
 sf::FloatRect boundingBox;
 Vector2f Alpha;
 sf::FloatRect otherBox;
+sf::Texture texture;
+sf::Texture textureViseur;
+sf::Texture textureR;
+sf::Texture textureViseurR;
+sf::Texture textureWall;
+sf::Texture textureBall;
+sf::Texture textureBall2;
+sf::RenderWindow window;
+
+Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
+Entity Ennemy = Entity(Vector2f(1200, 100), Vector2f(65, 65), &textureR, &textureViseurR);
+Wall Up = Wall(Vector2f(0, 0), Vector2f(window.getSize().x, 10), &textureWall);
+Wall Down = Wall(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3), &textureWall);
+Wall Left = Wall(Vector2f(0, 0), Vector2f(10, height), &textureWall);
+Wall Right = Wall(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height), &textureWall);
+Ball Balle = Ball(sf::Vector2f(), 15, &textureBall);
 
 Vector2f Beta;
 Vector2f Beta2;
 sf::Text VictoryText;
+sf::Text VictoryRoundText;
 sf::Text ScoreTextR;
 sf::Text ScoreTextB;
 
@@ -77,29 +71,68 @@ void Startwin(sf::RenderWindow &win, int NPlayer)
 	VictoryText.setCharacterSize(70);
 	if (NPlayer == 1)
 	{
-		VictoryText.setFillColor(sf::Color::Blue);
-		Player = "Bleu";
+		VictoryText.setFillColor(sf::Color(0xFFA1CAff));
+		Player = "Rose";
+		
 	}
 	if (NPlayer == 2)
 	{
-		VictoryText.setFillColor(sf::Color::Red);
-		Player = "Rouge";
+		VictoryText.setFillColor(sf::Color(0x50E255ff));
+		Player = "Vert";
+		
 	}
-	VictoryText.setString("Victoire du joueur " + Player);
+	
+		VictoryText.setString("Victoire du joueur " + Player);
+
 	FloatRect Alpha = VictoryText.getLocalBounds();
 	VictoryText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
 	VictoryText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.1f));
 	
 	int i = 0;
 }
+void WinRound(sf::RenderWindow &win, int NPlayer)
+{
+	std::string Player;
+
+	VictoryRoundText.setCharacterSize(70);
+	if (NPlayer == 1)
+	{
+		VictoryRoundText.setFillColor(sf::Color(0xFFA1CAff));
+		Player = "Rose";
+
+	}
+	if (NPlayer == 2)
+	{
+		VictoryRoundText.setFillColor(sf::Color(0x50E255ff));
+		Player = "Vert";
+
+	}
+	
+	if (ScoreBleu != 3 || ScoreRouge != 3)
+	{
+		VictoryRoundText.setString("Round gagne par joueur " + Player);
+		printf("ça menerve");
+		
+	}
+	
+	
+
+	FloatRect Alpha = VictoryRoundText.getLocalBounds();
+	VictoryRoundText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
+	VictoryRoundText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.1f));
+	
+	
+
+	int i = 0;
+}
 void ScoreTB(sf::RenderWindow &win)
 {
-	int ScoreB;
+	std::string ScoreB;
 	ScoreTextB.setCharacterSize(30);
-	ScoreTextB.setFillColor(sf::Color::Blue);
-	ScoreB = ScoreBleu;
+	ScoreTextB.setFillColor(sf::Color(0xFFA1CAff));
 	
-	ScoreTextB.setString("Score : " +ScoreB );
+	ScoreB = std::to_string(ScoreBleu);
+	ScoreTextB.setString("Score : " + ScoreB);
 
 	FloatRect Alpha = VictoryText.getLocalBounds();
 	ScoreTextB.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
@@ -109,11 +142,12 @@ void ScoreTB(sf::RenderWindow &win)
 }
 void ScoreTR(sf::RenderWindow &win)
 {
-	int ScoreR;
+	std::string ScoreR;
 	ScoreTextR.setCharacterSize(30);
-	ScoreTextR.setFillColor(sf::Color::Red);
+	ScoreTextR.setFillColor(sf::Color(0x50E255ff));
 	ScoreR = ScoreRouge;
 
+	ScoreR = std::to_string(ScoreRouge);
 	ScoreTextR.setString("Score : " + ScoreR);
 
 	FloatRect Alpha = VictoryText.getLocalBounds();
@@ -233,10 +267,23 @@ void world(sf::RenderWindow &win)
 					if (BallList[i].spawned == false)
 					{
 						printf("Hello");
-						ScoreBleu++;
-						Startwin(win, 2);
-						CharList.erase(CharList.begin());
 						
+						
+						
+						if (ScoreBleu == 2 || ScoreRouge == 2)
+						{
+							Startwin(win, 2);
+
+						}
+						else
+						{
+							WinRound(win, 2);
+						}
+						
+						Pause = true;
+						RedWin = true;
+						EndGame = true;
+						CharList[0].visible = false; 
 						break;
 					}
 				}
@@ -245,10 +292,22 @@ void world(sf::RenderWindow &win)
 				{
 					if (BallList[i].spawned == false)
 					{
-						ScoreRouge++;
-						Startwin(win, 1);
-						CharList.erase(CharList.begin() + 1);
 						
+						
+						if (ScoreBleu == 2 || ScoreRouge == 2)
+						{
+							Startwin(win, 1);
+
+						}
+						else
+						{
+							WinRound(win, 1);
+						}
+						Pause = true;
+						BlueWin = true;
+						EndGame = true;
+						CharList[1].visible = false;
+
 					}
 				}
 			}
@@ -263,17 +322,21 @@ void drawMur(sf::RenderWindow &win)
 	{
 		win.draw(Elem.mur);
 		Elem.SetPosition();
-
 	}
 }
 void drawTank(sf::RenderWindow &win)
 {
+	
 	for (Entity &Elem : CharList)
 	{
-		win.draw(Elem.tank);
-		win.draw(Elem.Viseur);
-		Elem.SetPosition();
+		if (Elem.visible == true)
+		{
+	      win.draw(Elem.tank);
+		  win.draw(Elem.Viseur);
+		}
 	
+		Elem.SetPosition();
+
 	}
 }
 
@@ -284,24 +347,40 @@ void drawBall(sf::RenderWindow &win)
 		win.draw(Elem.ball);
 		Elem.ball.move(Elem.U / 8, Elem.V / 8);
 		Elem.ball.rotate(3);
-
 	}
 }
+
+void Reset(sf::RenderWindow &win)
+{
+	
+	CharList[0].visible = true;
+	CharList[1].visible = true;
+	WallList.push_back(Up);
+	WallList.push_back(Down);
+	WallList.push_back(Left);
+	WallList.push_back(Right);
+	BallList.push_back(Balle);	
+	
+}
+
 
 int main()
 {
 	bool Shoot = false;
 	bool Shoot2 = false;
 	sf::Font * font = new sf::Font();
+	sf::Font * fontRound = new sf::Font();
 	sf::Font * FontScore = new sf::Font();
 	sf::Font * FontScore2 = new sf::Font();
-	sf::Texture texture;
-	sf::Texture textureViseur;
+	//sf::Texture texture;
+	//sf::Texture textureViseur;
 	sf::Texture textureR;
 	sf::Texture textureViseurR;
 	sf::Texture textureWall;
 	sf::Texture textureBall;
 	sf::Texture textureBall2;
+
+	
 
 	if (!textureWall.loadFromFile("res/wall.png"))
 		printf("pas mur");
@@ -317,25 +396,21 @@ int main()
 		printf("pas ball");
 	if (!textureBall2.loadFromFile("res/fireball2.png"))
 		printf("pas ball");
-	if (font->loadFromFile("res/DejaVuSans.ttf") == false)
-	{
+	if (font->loadFromFile("res/DOWNCOME.TTF") == false)
 		printf("no such font");
-
-	}
-	if (FontScore->loadFromFile("res/arial.ttf") == false)
-	{
+	if (fontRound->loadFromFile("res/DOWNCOME.TTF") == false)
 		printf("no such font");
-	}
-	if (FontScore2->loadFromFile("res/arial.ttf") == false)
-	{
+	if (FontScore->loadFromFile("res/DOWNCOME.TTF") == false)
 		printf("no such font");
-	}
+	if (FontScore2->loadFromFile("res/DOWNCOME.TTF") == false)
+		printf("no such font");
 	
 	VictoryText.setFont(*font);
+	VictoryRoundText.setFont(*fontRound);
 	ScoreTextB.setFont(*FontScore);
 	ScoreTextR.setFont(*FontScore2);
 	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
-	Entity Ennemy = Entity(Vector2f(1200, 100), Vector2f(65, 65), &textureR, &textureViseurR);
+	Entity Ennemy = Entity(Vector2f(1600, 100), Vector2f(65, 65), &textureR, &textureViseurR);
 
 
 	CharList.push_back(Player);
@@ -348,10 +423,10 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Default, settings);
 	height = window.getSize().y;
 	width = window.getSize().x;
-	Wall Up = Wall(Vector2f(0, 0), Vector2f(window.getSize().x, 10), &textureWall);
-	Wall Down = Wall(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3), &textureWall);
-	Wall Left = Wall(Vector2f(0, 0), Vector2f(10, height), &textureWall);
-	Wall Right = Wall(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height), &textureWall);
+	Up = Wall(Vector2f(0, 0), Vector2f(window.getSize().x, 10), &textureWall);
+	Down = Wall(Vector2f(0, (window.getSize().y) - 3), Vector2f(window.getSize().x, 3), &textureWall);
+	Left = Wall(Vector2f(0, 0), Vector2f(10, height), &textureWall);
+	Right = Wall(Vector2f(window.getSize().x - 3, 0), Vector2f(3, height), &textureWall);
 	WallList.push_back(Up);
 	WallList.push_back(Down);
 	WallList.push_back(Left);
@@ -378,170 +453,226 @@ int main()
 			}
 		}
 		world(window);
-		sf::Vector2i globalPosition = sf::Mouse::getPosition();
+	
+		if (EndGame == true && sf::Joystick::isButtonPressed(0,1) && Pause==true)
+		{
+			
+			EndGame = false;
+			window.clear();
+			if (BlueWin == true)
+			{
+				ScoreBleu++;
+				BlueWin = false;
+			}
+			if (RedWin == true)
+			{
+			
+				ScoreRouge++;
+				RedWin = false;
+			}
+			Pause = false;
+			if (ScoreBleu == 1 || ScoreRouge == 1)
+			{
+				CharList[0].position = Vector2f(150,800);
+				CharList[1].position = Vector2f(1600,100);
+			}
+			if (ScoreBleu == 1 && ScoreRouge == 1)
+			{
+				CharList[0].position = Vector2f(100,500);
+				CharList[1].position = Vector2f(1800,500);
+			}
+			if (ScoreBleu == 2 || ScoreRouge == 2)
+			{
+				CharList[1].position = Vector2f(150, 800);
+				CharList[0].position = Vector2f(1600,100);
+			}
+			if (ScoreBleu == 2 && ScoreRouge == 2)
+			{
+				CharList[1].position = Vector2f(100, 500);
+				CharList[0].position = Vector2f(1800, 500);
+			}
+			if (ScoreBleu == 3 || ScoreRouge == 3)
+			{
+				
+				ScoreBleu = 0;
+				ScoreRouge = 0;
+			}
+			
+
+			BallList.clear();
+			WallList.clear();
+			VictoryText.setString("");
+			VictoryRoundText.setString("");
+			Reset(window);
+		
+
+		}
 
 
 #pragma region Controls
-		if (CharList.size() > 1)
+		if (Pause == false)
 		{
-			if (sf::Joystick::isConnected(0))
+			if (CharList.size() > 1)
 			{
-				float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (x > 25)
+				if (sf::Joystick::isConnected(0))
 				{
-					CharList[0].tank.setRotation(-angle);
-					CharList[0].position.x += squareSpeed;
-				}
-
-			}
-			if (sf::Joystick::isConnected(1))
-			{
-				float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (x > 25)
-				{
-					CharList[1].tank.setRotation(-angle);
-					CharList[1].position.x += squareSpeed;
-				}
-
-			}
-			if (sf::Joystick::isConnected(0))
-			{
-				float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (x < -25)
-				{
-					CharList[0].tank.setRotation(-angle);
-					CharList[0].position.x -= squareSpeed;
-
-				}
-
-			}
-			if (sf::Joystick::isConnected(1))
-			{
-				float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (x < -25)
-				{
-					CharList[1].tank.setRotation(-angle);
-					CharList[1].position.x -= squareSpeed;
-
-				}
-
-			}
-			if (sf::Joystick::isConnected(0))
-			{
-				float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (y > 25)
-				{
-					CharList[0].tank.setRotation(-angle);
-					CharList[0].position.y += squareSpeed;
-
-				}
-
-			}
-			if (sf::Joystick::isConnected(1))
-			{
-				float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (y > 25)
-				{
-					CharList[1].tank.setRotation(-angle);
-					CharList[1].position.y += squareSpeed;
-
-				}
-
-			}
-			if (sf::Joystick::isConnected(0))
-			{
-				float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (y < -25)
-				{
-					CharList[0].tank.setRotation(-angle);
-					CharList[0].position.y -= squareSpeed;
-				}
-
-			}
-			if (sf::Joystick::isConnected(1))
-			{
-				float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
-				float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
-				float angle = (atan2(x, y) * 180 / 3.141592654);
-				if (y < -25)
-				{
-					CharList[1].tank.setRotation(-angle);
-					CharList[1].position.y -= squareSpeed;
-				}
-
-			}
-			if (sf::Joystick::isConnected)
-			{
-
-				float u = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
-				float r = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
-				if (u > 25 || u < -25 || r>25 || r < -25)
-				{
-					float angle = (atan2(u, r) * 180) / 3.141592654;
-					CharList[0].Viseur.setRotation(-angle);
-
-
-					if (!Shoot && sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
+					float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (x > 25)
 					{
-						Ball Balle = Ball(sf::Vector2f(CharList[0].Viseur.getPosition().x - 5, CharList[0].Viseur.getPosition().y), 15,&textureBall);
-						Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
-						Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
-						Balle.BallLife = 0;
-						BallList.push_back(Balle);
+						CharList[0].tank.setRotation(-angle);
+						CharList[0].position.x += squareSpeed;
 					}
-					if (sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
-					{
-						Shoot = true;
-					}
-					else
-					{
-						Shoot = false;
-					}
-				}
 
-			}
-			if (sf::Joystick::isConnected)
-			{
-				float u = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
-				float r = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
-				
-				if (u > 25 || u < -25 || r>25 || r < -25)
+				}
+				if (sf::Joystick::isConnected(1))
 				{
-					float angle = (atan2(u, r) * 180) / 3.141592654;
-					CharList[1].Viseur.setRotation(-angle);
+					float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (x > 25)
+					{
+						CharList[1].tank.setRotation(-angle);
+						CharList[1].position.x += squareSpeed;
+					}
 
-					if (!Shoot2 && sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
-					{
-						Ball Balle = Ball(sf::Vector2f(CharList[1].Viseur.getPosition().x - 5, CharList[1].Viseur.getPosition().y), 15, &textureBall2);
-						Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
-						Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
-						Balle.BallLife = 0;
-						BallList.push_back(Balle);
-					}
-					if (sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
-					{
-						Shoot2 = true;
-					}
-					else
-					{
-						Shoot2 = false;
-					}
 				}
+				if (sf::Joystick::isConnected(0))
+				{
+					float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (x < -25)
+					{
+						CharList[0].tank.setRotation(-angle);
+						CharList[0].position.x -= squareSpeed;
 
+					}
+
+				}
+				if (sf::Joystick::isConnected(1))
+				{
+					float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (x < -25)
+					{
+						CharList[1].tank.setRotation(-angle);
+						CharList[1].position.x -= squareSpeed;
+
+					}
+
+				}
+				if (sf::Joystick::isConnected(0))
+				{
+					float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (y > 25)
+					{
+						CharList[0].tank.setRotation(-angle);
+						CharList[0].position.y += squareSpeed;
+
+					}
+
+				}
+				if (sf::Joystick::isConnected(1))
+				{
+					float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (y > 25)
+					{
+						CharList[1].tank.setRotation(-angle);
+						CharList[1].position.y += squareSpeed;
+
+					}
+
+				}
+				if (sf::Joystick::isConnected(0))
+				{
+					float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (y < -25)
+					{
+						CharList[0].tank.setRotation(-angle);
+						CharList[0].position.y -= squareSpeed;
+					}
+
+				}
+				if (sf::Joystick::isConnected(1))
+				{
+					float x = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+					float y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+					float angle = (atan2(x, y) * 180 / 3.141592654);
+					if (y < -25)
+					{
+						CharList[1].tank.setRotation(-angle);
+						CharList[1].position.y -= squareSpeed;
+					}
+
+				}
+				if (sf::Joystick::isConnected)
+				{
+
+					float u = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
+					float r = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+					if (u > 25 || u < -25 || r>25 || r < -25)
+					{
+						float angle = (atan2(u, r) * 180) / 3.141592654;
+						CharList[0].Viseur.setRotation(-angle);
+
+
+						if (!Shoot && sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
+						{
+							Ball Balle = Ball(sf::Vector2f(CharList[0].Viseur.getPosition().x - 5, CharList[0].Viseur.getPosition().y), 15, &textureBall);
+							Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
+							Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
+							Balle.BallLife = 0;
+							BallList.push_back(Balle);
+						}
+						if (sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
+						{
+							Shoot = true;
+						}
+						else
+						{
+							Shoot = false;
+						}
+					}
+
+				}
+				if (sf::Joystick::isConnected)
+				{
+					float u = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
+					float r = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
+
+					if (u > 25 || u < -25 || r>25 || r < -25)
+					{
+						float angle = (atan2(u, r) * 180) / 3.141592654;
+						CharList[1].Viseur.setRotation(-angle);
+
+						if (!Shoot2 && sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
+						{
+							Ball Balle = Ball(sf::Vector2f(CharList[1].Viseur.getPosition().x - 5, CharList[1].Viseur.getPosition().y), 15, &textureBall2);
+							Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
+							Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
+							Balle.BallLife = 0;
+							BallList.push_back(Balle);
+						}
+						if (sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
+						{
+							Shoot2 = true;
+						}
+						else
+						{
+							Shoot2 = false;
+						}
+					}
+
+				}
 			}
 		}
 		
@@ -557,6 +688,8 @@ int main()
 		window.draw(ScoreTextB);
 		window.draw(ScoreTextR);
 		window.draw(VictoryText);
+		window.draw(VictoryRoundText);
+		
 		window.display();//ca dessine et ca attend la vsync
 
 	}
@@ -564,3 +697,4 @@ int main()
 	return 0;
 }
 
+//Envoi projet

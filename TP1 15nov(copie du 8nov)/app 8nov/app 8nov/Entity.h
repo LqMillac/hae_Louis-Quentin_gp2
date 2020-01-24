@@ -12,6 +12,7 @@ public:
 	sf::RectangleShape BoxCollider;
 	sf::Texture *texture;
 	sf::Texture *textureViseur;
+	bool visible = true;
 	int TankLife;
 
 	sf::FloatRect Box;
@@ -32,20 +33,14 @@ public:
 		if (texture ) {
 			tank.setTexture(texture);
 			tank.setFillColor(sf::Color::White);
-		
-			
+
 		}
 		if (textureViseur)
 		{
 			Viseur.setTexture(textureViseur);
 			Viseur.setFillColor(sf::Color::White);
 		}
-		
-		
-		
-		
-	
-		
+
 	};
 	void SetPosition()
 	{
