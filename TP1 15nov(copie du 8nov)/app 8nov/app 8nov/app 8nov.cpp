@@ -534,10 +534,10 @@ int main()
 		printf("no such font");
 	if (!FootballAmericain.loadFromFile("res/FootballAmericain.png"))
 		printf("pas de terrain");
-	if (!Explosion.loadFromFile("res/explosion.png"))
-		printf("pas BOUM");
+	/*if (!Explosion.loadFromFile("res/explosion.png"))
+		printf("pas BOUM");*/
 
-	Explosion.loadFromFile("res/explosion.png");
+	Explosion.loadFromFile("res/explosion2.png");
 	Sprite Explo(Explosion);
 	float frame = 0;
 	float animspeed = 0.4;
@@ -669,15 +669,17 @@ int main()
 
 		}
 		
-		/*SExplosion.setScale(sf::Vector2f(10, 10));
-		SExplosion.setTextureRect(IntRect(int(frame) * 20, 0, 30, 30));
-		frame += animspeed;
-		SExplosion.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
-		if (frame < framecount)
-		{
 
-			window.draw(SExplosion);
-		}*/
+			Explo.setScale(sf::Vector2f(10,10));
+			Explo.setTextureRect(IntRect(int(frame) * 50, 0, 50, 50));
+			frame += animspeed;
+			Explo.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
+			if (frame < framecount)
+			{
+
+				window.draw(Explo);
+			}
+		
 		
 		
 		
@@ -859,10 +861,7 @@ int main()
 
 		window.draw(Map);
 		//window.draw(Bordure);
-		Explo.setScale(sf::Vector2f(10, 10));
-		frame += animspeed;
-		if (frame = framecount) frame = 0;
-		Explo.setTextureRect(IntRect(int(frame) * 20,0,30,30));
+		
 		window.draw(Explo);
 		drawBall(window);
 		drawMur(window);
