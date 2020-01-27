@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestIntegrationBox2D", "TestIntegrationBox2D\TestIntegrationBox2D.vcxproj", "{AE0864A8-331F-4951-B3DB-947E3D937881}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Debug|x64.ActiveCfg = Debug|x64
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Debug|x64.Build.0 = Debug|x64
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Debug|x86.Build.0 = Debug|Win32
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Release|x64.ActiveCfg = Release|x64
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Release|x64.Build.0 = Release|x64
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Release|x86.ActiveCfg = Release|Win32
+		{AE0864A8-331F-4951-B3DB-947E3D937881}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B1C13C0-4A10-4D62-B18E-2DBCD8FEA572}
+	EndGlobalSection
+EndGlobal

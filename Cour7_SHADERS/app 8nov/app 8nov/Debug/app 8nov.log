@@ -1,0 +1,10 @@
+﻿  app 8nov.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(155): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(158): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(170): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(173): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(245): warning C4474: 'printf' : trop d'arguments passés pour la chaîne de format
+  c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(245): note: les espaces réservés et leurs paramètres attendent des arguments 0 variadiques, mais des arguments 1 ont été fournis
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(346): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cour7_shaders\app 8nov\app 8nov\app 8nov.cpp(347): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\Cour7_SHADERS\app 8nov\Debug\app 8nov.exe

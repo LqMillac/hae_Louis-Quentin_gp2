@@ -1,0 +1,18 @@
+﻿  Game.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cours8 mt case david\app\game.cpp(68): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cours8 mt case david\app\game.cpp(70): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cours8 mt case david\app\game.cpp(132): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2\cours8 mt case david\app\game.cpp(136): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  App.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2\cours8 mt Case David\App\Debug\App.exe
