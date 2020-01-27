@@ -860,7 +860,7 @@ int main()
 		window.clear();
 
 		window.draw(Map);
-		//window.draw(Bordure);
+		
 		
 		window.draw(Explo);
 		drawBall(window);
