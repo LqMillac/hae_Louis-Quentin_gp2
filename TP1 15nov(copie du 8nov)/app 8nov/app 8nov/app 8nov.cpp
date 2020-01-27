@@ -863,7 +863,7 @@ int main()
 		window.draw(Map);
 		
 		
-		//window.draw(Explo);
+		window.draw(Explo);
 		drawBall(window);
 		drawMur(window);
 		drawTank(window);
