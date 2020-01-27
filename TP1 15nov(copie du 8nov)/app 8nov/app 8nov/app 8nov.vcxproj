@@ -163,6 +163,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Lib.h" />
     <ClInclude Include="Mur.h" />
+    <ClInclude Include="Particule.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +172,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Lib.cpp" />
     <ClCompile Include="Mur.cpp" />
+    <ClCompile Include="Particule.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

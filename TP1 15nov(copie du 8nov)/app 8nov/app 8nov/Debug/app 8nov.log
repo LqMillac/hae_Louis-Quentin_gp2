@@ -1,1 +1,142 @@
-﻿  app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe
+﻿  app 8nov.cpp
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(65): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(66): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(67): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(111): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(113): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(148): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(150): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(167): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(183): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(191): warning C4018: '<' : incompatibilité signed/unsigned
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(226): warning C4018: '<' : incompatibilité signed/unsigned
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(543): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(571): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(572): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(573): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(574): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(574): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(696): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(708): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(720): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(733): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(746): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(759): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(772): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(784): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(792): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(799): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(822): warning C4551: liste d'arguments manquante dans l'appel de fonction
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(829): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+c:\workspace\louis-quentin\hae_louis-quentin_gp2-master\tp1 15nov(copie du 8nov)\app 8nov\app 8nov\app 8nov.cpp(864): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  app 8nov.vcxproj -> C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\TP1 15nov(copie du 8nov)\app 8nov\Debug\app 8nov.exe

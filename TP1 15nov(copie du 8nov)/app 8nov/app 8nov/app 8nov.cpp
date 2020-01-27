@@ -23,10 +23,11 @@ static std::vector<Wall> WallList;
 static Vector2f shPos(0, 0);
 static int height;
 static int width;
-//test
+
 
 int squareSpeed = 3;
 int BallSpeed = 5;
+
 
 
 int ScoreBleu = 0;
@@ -34,6 +35,8 @@ int ScoreRouge = 0;
 bool EndGame = false;
 bool BlueWin = false;
 bool RedWin = false;
+bool mort = false;
+bool mort2 = false;
 bool Pause = false;
 
 
@@ -50,6 +53,9 @@ sf::Texture textureViseurR;
 sf::Texture textureWall;
 sf::Texture textureBall;
 sf::Texture textureBall2;
+
+
+
 sf::RenderWindow window;
 
 Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
@@ -277,10 +283,7 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[4].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+				
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -294,10 +297,7 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[5].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+			
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -311,10 +311,7 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[6].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+			
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -328,11 +325,8 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[7].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-				BallList[i].U = -BallList[i].U;
+				
+				BallList[i].V = -BallList[i].V;
 				if (BallList[i].BallLife == 1)
 				{
 					BallList.erase(BallList.begin() + i);
@@ -345,10 +339,7 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[8].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+				
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -362,11 +353,8 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[9].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-				BallList[i].U = -BallList[i].U;
+				
+				BallList[i].V = -BallList[i].V;
 				if (BallList[i].BallLife == 1)
 				{
 					BallList.erase(BallList.begin() + i);
@@ -390,7 +378,7 @@ void world(sf::RenderWindow &win)
 				{
 					if (BallList[i].spawned == false)
 					{
-						printf("Hello");
+						
 						
 						
 						
@@ -404,10 +392,12 @@ void world(sf::RenderWindow &win)
 							WinRound(win, 2);
 						}
 						
+						mort = true;
 						Pause = true;
 						RedWin = true;
 						EndGame = true;
 						CharList[0].visible = false; 
+						
 						break;
 					}
 				}
@@ -427,6 +417,8 @@ void world(sf::RenderWindow &win)
 						{
 							WinRound(win, 1);
 						}
+						
+						mort2 = true;
 						Pause = true;
 						BlueWin = true;
 						EndGame = true;
@@ -475,6 +467,7 @@ void drawBall(sf::RenderWindow &win)
 
 }
 
+
 void Reset(sf::RenderWindow &win)
 {
 	
@@ -498,10 +491,9 @@ void Reset(sf::RenderWindow &win)
 int main()
 {
 	sf::RectangleShape Map(Vector2f(1920, 1080));
-	/*sf::Vector2f vec(400, 400);
-	sf::RectangleShape Bordure(vec);
-	Bordure.setPosition(1920 / 2 - 200, 1080 / 2 - 200);*/
-
+	window.setFramerateLimit(60);
+	
+	
 	bool Shoot = false;
 	bool Shoot2 = false;
 	sf::Font * font = new sf::Font();
@@ -515,8 +507,8 @@ int main()
 	sf::Texture textureBall;
 	sf::Texture textureBall2;
 	sf::Texture FootballAmericain;
+	Texture Explosion;
 
-	
 
 	if (!textureWall.loadFromFile("res/mur.jpg"))
 		printf("pas mur");
@@ -524,9 +516,9 @@ int main()
 		printf("pasTank");
 	if (!textureViseur.loadFromFile("res/canon sans tank.png"))
 		printf("pasTank");
-	if (!textureR.loadFromFile("res/tank sans canon rouge.png"))
+	if (!textureR.loadFromFile("res/tank sans canon2.png"))
 		printf("pasTank");
-	if (!textureViseurR.loadFromFile("res/canon tank rouge.png"))
+	if (!textureViseurR.loadFromFile("res/canon sans tank2.png"))
 		printf("pasTank");
 	if (!textureBall.loadFromFile("res/fireball.png"))
 		printf("pas ball");
@@ -542,10 +534,19 @@ int main()
 		printf("no such font");
 	if (!FootballAmericain.loadFromFile("res/FootballAmericain.png"))
 		printf("pas de terrain");
+	if (!Explosion.loadFromFile("res/explosion.png"))
+		printf("pas BOUM");
 
+	Explosion.loadFromFile("res/explosion.png");
+	Sprite Explo(Explosion);
+	float frame = 0;
+	float animspeed = 0.4;
+	int framecount = 20;
 
 	Map.setTexture(&FootballAmericain);
-	//Bordure.setTexture(&textureWall);
+	
+	
+	
 	
 	VictoryText.setFont(*font);
 	VictoryRoundText.setFont(*fontRound);
@@ -555,7 +556,7 @@ int main()
 	ScoreTextR.setFont(*FontScore2);
 	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
 	Entity Ennemy = Entity(Vector2f(1600, 100), Vector2f(65, 65), &textureR, &textureViseurR);
-
+	
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
@@ -590,6 +591,7 @@ int main()
 	WallList.push_back(Bordure6);
 
 	window.setVerticalSyncEnabled(true);
+
 
 	while (window.isOpen())//on passe tout le temps DEBUT DE LA FRAME 
 	{
@@ -666,7 +668,19 @@ int main()
 		
 
 		}
+		
+		/*SExplosion.setScale(sf::Vector2f(10, 10));
+		SExplosion.setTextureRect(IntRect(int(frame) * 20, 0, 30, 30));
+		frame += animspeed;
+		SExplosion.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
+		if (frame < framecount)
+		{
 
+			window.draw(SExplosion);
+		}*/
+		
+		
+		
 
 #pragma region Controls
 	
@@ -845,9 +859,16 @@ int main()
 
 		window.draw(Map);
 		//window.draw(Bordure);
+		Explo.setScale(sf::Vector2f(10, 10));
+		frame += animspeed;
+		if (frame = framecount) frame = 0;
+		Explo.setTextureRect(IntRect(int(frame) * 20,0,30,30));
+		window.draw(Explo);
 		drawBall(window);
 		drawMur(window);
 		drawTank(window);
+		
+		
 		window.draw(ScoreTextB);
 		window.draw(ScoreTextR);
 		window.draw(VictoryText);
