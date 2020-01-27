@@ -669,16 +669,17 @@ int main()
 
 		}
 		
-
-			Explo.setScale(sf::Vector2f(10,10));
-			Explo.setTextureRect(IntRect(int(frame) * 50, 0, 50, 50));
-			frame += animspeed;
-			Explo.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
-			if (frame < framecount)
+		Explo.setScale(sf::Vector2f(10, 10));
+		Explo.setTextureRect(IntRect(int(frame) * 50, 0, 50, 50));
+		frame += animspeed;
+		Explo.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
+		window.draw(Explo);
+			
+			/*if (frame < framecount)
 			{
 
 				window.draw(Explo);
-			}
+			}*/
 		
 		
 		
@@ -862,7 +863,7 @@ int main()
 		window.draw(Map);
 		
 		
-		window.draw(Explo);
+		//window.draw(Explo);
 		drawBall(window);
 		drawMur(window);
 		drawTank(window);
