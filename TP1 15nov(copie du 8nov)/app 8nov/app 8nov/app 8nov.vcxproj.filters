@@ -30,9 +30,12 @@
     <ClInclude Include="Mur.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Particule.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -53,8 +56,11 @@
     <ClCompile Include="Mur.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Particule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
   </ItemGroup>
 </Project>

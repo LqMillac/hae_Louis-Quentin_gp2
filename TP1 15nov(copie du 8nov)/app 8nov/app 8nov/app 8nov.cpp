@@ -29,14 +29,20 @@ int squareSpeed = 3;
 int BallSpeed = 5;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 int ScoreBleu = 0;
 int ScoreRouge = 0;
 bool EndGame = false;
 bool BlueWin = false;
 bool RedWin = false;
+<<<<<<< HEAD
 bool mort = false;
 bool mort2 = false;
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 bool Pause = false;
 
 
@@ -53,9 +59,12 @@ sf::Texture textureViseurR;
 sf::Texture textureWall;
 sf::Texture textureBall;
 sf::Texture textureBall2;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 sf::RenderWindow window;
 
 Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
@@ -283,7 +292,14 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[4].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 				
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -297,7 +313,14 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[5].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 			
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -311,7 +334,14 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[6].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 			
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -325,8 +355,16 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[7].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 				
 				BallList[i].V = -BallList[i].V;
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+				BallList[i].U = -BallList[i].U;
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				if (BallList[i].BallLife == 1)
 				{
 					BallList.erase(BallList.begin() + i);
@@ -339,7 +377,14 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[8].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 				
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
@@ -353,8 +398,16 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[9].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+<<<<<<< HEAD
 				
 				BallList[i].V = -BallList[i].V;
+=======
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
+				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
+				BallList[i].U = -BallList[i].U;
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 				if (BallList[i].BallLife == 1)
 				{
 					BallList.erase(BallList.begin() + i);
@@ -378,7 +431,11 @@ void world(sf::RenderWindow &win)
 				{
 					if (BallList[i].spawned == false)
 					{
+<<<<<<< HEAD
 						
+=======
+						printf("Hello");
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 						
 						
 						
@@ -392,12 +449,18 @@ void world(sf::RenderWindow &win)
 							WinRound(win, 2);
 						}
 						
+<<<<<<< HEAD
 						mort = true;
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 						Pause = true;
 						RedWin = true;
 						EndGame = true;
 						CharList[0].visible = false; 
+<<<<<<< HEAD
 						
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 						break;
 					}
 				}
@@ -417,8 +480,11 @@ void world(sf::RenderWindow &win)
 						{
 							WinRound(win, 1);
 						}
+<<<<<<< HEAD
 						
 						mort2 = true;
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 						Pause = true;
 						BlueWin = true;
 						EndGame = true;
@@ -467,7 +533,10 @@ void drawBall(sf::RenderWindow &win)
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 void Reset(sf::RenderWindow &win)
 {
 	
@@ -491,9 +560,16 @@ void Reset(sf::RenderWindow &win)
 int main()
 {
 	sf::RectangleShape Map(Vector2f(1920, 1080));
+<<<<<<< HEAD
 	window.setFramerateLimit(60);
 	
 	
+=======
+	/*sf::Vector2f vec(400, 400);
+	sf::RectangleShape Bordure(vec);
+	Bordure.setPosition(1920 / 2 - 200, 1080 / 2 - 200);*/
+
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 	bool Shoot = false;
 	bool Shoot2 = false;
 	sf::Font * font = new sf::Font();
@@ -507,8 +583,13 @@ int main()
 	sf::Texture textureBall;
 	sf::Texture textureBall2;
 	sf::Texture FootballAmericain;
+<<<<<<< HEAD
 	Texture Explosion;
 
+=======
+
+	
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 
 	if (!textureWall.loadFromFile("res/mur.jpg"))
 		printf("pas mur");
@@ -516,9 +597,15 @@ int main()
 		printf("pasTank");
 	if (!textureViseur.loadFromFile("res/canon sans tank.png"))
 		printf("pasTank");
+<<<<<<< HEAD
 	if (!textureR.loadFromFile("res/tank sans canon2.png"))
 		printf("pasTank");
 	if (!textureViseurR.loadFromFile("res/canon sans tank2.png"))
+=======
+	if (!textureR.loadFromFile("res/tank sans canon rouge.png"))
+		printf("pasTank");
+	if (!textureViseurR.loadFromFile("res/canon tank rouge.png"))
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 		printf("pasTank");
 	if (!textureBall.loadFromFile("res/fireball.png"))
 		printf("pas ball");
@@ -534,6 +621,7 @@ int main()
 		printf("no such font");
 	if (!FootballAmericain.loadFromFile("res/FootballAmericain.png"))
 		printf("pas de terrain");
+<<<<<<< HEAD
 	/*if (!Explosion.loadFromFile("res/explosion.png"))
 		printf("pas BOUM");*/
 
@@ -547,6 +635,12 @@ int main()
 	
 	
 	
+=======
+
+
+	Map.setTexture(&FootballAmericain);
+	//Bordure.setTexture(&textureWall);
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 	
 	VictoryText.setFont(*font);
 	VictoryRoundText.setFont(*fontRound);
@@ -556,7 +650,11 @@ int main()
 	ScoreTextR.setFont(*FontScore2);
 	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
 	Entity Ennemy = Entity(Vector2f(1600, 100), Vector2f(65, 65), &textureR, &textureViseurR);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 
 	CharList.push_back(Player);
 	CharList.push_back(Ennemy);
@@ -592,7 +690,10 @@ int main()
 
 	window.setVerticalSyncEnabled(true);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 	while (window.isOpen())//on passe tout le temps DEBUT DE LA FRAME 
 	{
 		sf::Event event;//recup les evenement clavier/pad
@@ -668,6 +769,7 @@ int main()
 		
 
 		}
+<<<<<<< HEAD
 		
 		Explo.setScale(sf::Vector2f(10, 10));
 		Explo.setTextureRect(IntRect(int(frame) * 50, 0, 50, 50));
@@ -684,6 +786,9 @@ int main()
 		
 		
 		
+=======
+
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 
 #pragma region Controls
 	
@@ -861,6 +966,7 @@ int main()
 		window.clear();
 
 		window.draw(Map);
+<<<<<<< HEAD
 		
 		
 		window.draw(Explo);
@@ -869,6 +975,12 @@ int main()
 		drawTank(window);
 		
 		
+=======
+		//window.draw(Bordure);
+		drawBall(window);
+		drawMur(window);
+		drawTank(window);
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
 		window.draw(ScoreTextB);
 		window.draw(ScoreTextR);
 		window.draw(VictoryText);

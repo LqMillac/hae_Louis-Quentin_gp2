@@ -23,7 +23,11 @@
     <ProjectGuid>{3C117128-8C53-4548-BD99-467D86C90D83}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>app8nov</RootNamespace>
+<<<<<<< HEAD
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+=======
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,13 +95,21 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\SFML\include</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>C:\Users\squas\Desktop\C++ David\hae_Louis-Quentin_gp2-master\SFML\include</AdditionalIncludeDirectories>
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio.lib;opengl32.lib;freetype.lib;winmm.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\SFML\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>C:\Users\squas\Desktop\C++ David\hae_Louis-Quentin_gp2-master\SFML\lib</AdditionalLibraryDirectories>
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,13 +121,21 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\SFML\include</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>C:\Users\squas\Desktop\C++ David\hae_Louis-Quentin_gp2-master\SFML\include</AdditionalIncludeDirectories>
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio.lib;opengl32.lib;freetype.lib;winmm.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<<<<<<< HEAD
       <AdditionalLibraryDirectories>C:\WorkSpace\Louis-Quentin\hae_Louis-Quentin_gp2-master\SFML\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalLibraryDirectories>C:\Users\squas\Desktop\C++ David\hae_Louis-Quentin_gp2-master\SFML\lib</AdditionalLibraryDirectories>
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -163,7 +183,10 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Lib.h" />
     <ClInclude Include="Mur.h" />
+<<<<<<< HEAD
     <ClInclude Include="Particule.h" />
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +195,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Lib.cpp" />
     <ClCompile Include="Mur.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Particule.cpp" />
+=======
+>>>>>>> f703ee2b19c14fa3fd39e3f5d4f65aaf0a4587ab
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
