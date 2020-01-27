@@ -20,7 +20,7 @@ public:
 	{
 		BoxCollider.setSize(size);
 		tank.setOrigin((size.x / 2), (size.y / 2));
-		Viseur.setOrigin((Viseur.getSize().x / 2)+20, 0+14);
+		Viseur.setOrigin((Viseur.getSize().x / 2)+20, 0+18);
 		tank.setSize(size);
 		position = pos;
 		tank.setFillColor(sf::Color::Magenta);
