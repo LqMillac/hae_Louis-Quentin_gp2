@@ -1,0 +1,39 @@
+﻿  pch.cpp
+  app 8nov.cpp
+app 8nov.cpp(72): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(73): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(74): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+app 8nov.cpp(75): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(75): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+app 8nov.cpp(120): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(122): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(157): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(176): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(192): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(222): warning C4018: '<' : incompatibilité signed/unsigned
+app 8nov.cpp(257): warning C4018: '<' : incompatibilité signed/unsigned
+app 8nov.cpp(649): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(650): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(651): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+app 8nov.cpp(652): warning C4244: 'argument' : conversion de 'unsigned int' en 'float', perte possible de données
+app 8nov.cpp(652): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+app 8nov.cpp(768): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(780): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(792): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(805): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(818): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(831): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(844): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(856): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(864): warning C4551: liste d'arguments manquante dans l'appel de fonction
+app 8nov.cpp(871): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+app 8nov.cpp(897): warning C4551: liste d'arguments manquante dans l'appel de fonction
+app 8nov.cpp(904): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Ball.cpp
+  Entity.cpp
+  Lib.cpp
+  Mur.cpp
+  Génération de code en cours
+  All 402 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Fin de la génération du code
+  app 8nov.vcxproj -> C:\Users\squas\Desktop\C++ David\hae_Louis-Quentin_gp2\TP1 15nov(copie du 8nov)\app 8nov\Release\app 8nov.exe

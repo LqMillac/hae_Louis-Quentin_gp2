@@ -9,6 +9,7 @@
 #include "Lib.h"
 #include <direct.h>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Entity.h"
 #include "Ball.h"
 #include "Mur.h"
@@ -27,8 +28,8 @@ static int width;
 
 int squareSpeed = 3;
 int BallSpeed = 5;
-
-
+int ballcad= 0;
+int ballcad2 = 0;
 
 
 int ScoreBleu = 0;
@@ -36,11 +37,12 @@ int ScoreRouge = 0;
 bool EndGame = false;
 bool BlueWin = false;
 bool RedWin = false;
-<<<<<<< HEAD
+bool Pause = false;
+bool menu = true;
 bool mort = false;
 bool mort2 = false;
-
-bool Pause = false;
+bool boumballon = false;
+bool boumballon2 = false;
 
 
 
@@ -56,9 +58,10 @@ sf::Texture textureViseurR;
 sf::Texture textureWall;
 sf::Texture textureBall;
 sf::Texture textureBall2;
-
-
-
+sf::SoundBuffer Boom;
+sf::Sound Destruction;
+sf::Texture ExploBallon;
+Sprite BallonBoom(ExploBallon);
 
 
 sf::RenderWindow window;
@@ -86,6 +89,7 @@ sf::Text VictoryRoundText;
 sf::Text NextRoundText;
 sf::Text ScoreTextR;
 sf::Text ScoreTextB;
+sf::Text MenuText;
 
 void Startwin(sf::RenderWindow &win, int NPlayer)
 {
@@ -95,16 +99,16 @@ void Startwin(sf::RenderWindow &win, int NPlayer)
 	NextRoundText.setCharacterSize(50);
 	if (NPlayer == 1)
 	{
-		VictoryText.setFillColor(sf::Color(0xFFEB62ff));
-		NextRoundText.setFillColor(sf::Color(0xFFEB62ff));
-		Player = "Rose";
+		VictoryText.setFillColor(sf::Color(0x42DBD6ff));
+		NextRoundText.setFillColor(sf::Color(0x42DBD6ff));
+		Player = "Bleu";
 		
 	}
 	if (NPlayer == 2)
 	{
-		VictoryText.setFillColor(sf::Color(0x7AF5FFff));
-		NextRoundText.setFillColor(sf::Color(0x7AF5FFff));
-		Player = "Vert";
+		VictoryText.setFillColor(sf::Color(0xD29EF5ff));
+		NextRoundText.setFillColor(sf::Color(0xD29EF5ff));
+		Player = "Rose";
 		
 	}
 	
@@ -128,16 +132,16 @@ void WinRound(sf::RenderWindow &win, int NPlayer)
 	NextRoundText.setCharacterSize(50);
 	if (NPlayer == 1)
 	{
-		VictoryRoundText.setFillColor(sf::Color(0xFFEB62ff));
-		NextRoundText.setFillColor(sf::Color(0xFFEB62ff));
-		Player = "Rose";
+		VictoryRoundText.setFillColor(sf::Color(0x42DBD6ff));
+		NextRoundText.setFillColor(sf::Color(0x42DBD6ff));
+		Player = "Bleu";
 
 	}
 	if (NPlayer == 2)
 	{
-		VictoryRoundText.setFillColor(sf::Color(0x7AF5FFff));
-		NextRoundText.setFillColor(sf::Color(0x7AF5FFff));
-		Player = "Vert";
+		VictoryRoundText.setFillColor(sf::Color(0xD29EF5ff));
+		NextRoundText.setFillColor(sf::Color(0xD29EF5ff));
+		Player = "Rose";
 
 	}
 	
@@ -150,9 +154,9 @@ void WinRound(sf::RenderWindow &win, int NPlayer)
 
 	FloatRect Alpha = VictoryRoundText.getLocalBounds();
 	VictoryRoundText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
-	VictoryRoundText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.1f));
+	VictoryRoundText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.05f));
 	NextRoundText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
-	NextRoundText.setPosition(Vector2f(win.getSize().x / 2, win.getSize().y - win.getSize().y / 1.25f));
+	NextRoundText.setPosition(Vector2f(win.getSize().x / 1.98f, win.getSize().y - win.getSize().y / 1.2f));
 	
 	
 
@@ -162,14 +166,14 @@ void ScoreTB(sf::RenderWindow &win)
 {
 	std::string ScoreB;
 	ScoreTextB.setCharacterSize(30);
-	ScoreTextB.setFillColor(sf::Color(0xFFEB62ff));
+	ScoreTextB.setFillColor(sf::Color(0x42DBD6ff));
 	
 	ScoreB = std::to_string(ScoreBleu);
 	ScoreTextB.setString("Score : " + ScoreB);
 
 	FloatRect Alpha = VictoryText.getLocalBounds();
 	ScoreTextB.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
-	ScoreTextB.setPosition(Vector2f(win.getSize().x / 29, win.getSize().y - win.getSize().y /1.02f));
+	ScoreTextB.setPosition(Vector2f(win.getSize().x / 22, win.getSize().y - win.getSize().y /1.02f));
 	
    
 }
@@ -177,7 +181,7 @@ void ScoreTR(sf::RenderWindow &win)
 {
 	std::string ScoreR;
 	ScoreTextR.setCharacterSize(30);
-	ScoreTextR.setFillColor(sf::Color(0x7AF5FFff));
+	ScoreTextR.setFillColor(sf::Color(0xD29EF5ff));
 	ScoreR = ScoreRouge;
 
 	ScoreR = std::to_string(ScoreRouge);
@@ -185,14 +189,36 @@ void ScoreTR(sf::RenderWindow &win)
 
 	FloatRect Alpha = VictoryText.getLocalBounds();
 	ScoreTextR.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
-	ScoreTextR.setPosition(Vector2f(win.getSize().x / 29, win.getSize().y - win.getSize().y / 1.05f));
+	ScoreTextR.setPosition(Vector2f(win.getSize().x / 22, win.getSize().y - win.getSize().y / 1.05f));
 
 
 }
+void Menu(sf::RenderWindow & win)
+{
+	std::string menu;
+	MenuText.setCharacterSize(90);
+	MenuText.setFillColor(sf::Color(0xFF2EDCff));
+	MenuText.setString("     Madden Tank NFL\n Le premier a 3points \nStart pour commencer");
+	
+	FloatRect Alpha = MenuText.getLocalBounds();
+	MenuText.setOrigin(Vector2f(Alpha.width / 2, Alpha.height / 2));
+	MenuText.setPosition(Vector2f(win.getSize().x / 2.16f, win.getSize().y - win.getSize().y / 1.7f));
+	Pause = true;
+
+	
+}
 void world(sf::RenderWindow &win)
 {
+	
 	ScoreTB(win);
 	ScoreTR(win);
+	
+	
+	if (Pause == false && menu == true)
+	{
+		Menu(win);
+		
+	}
 	for (int i = 0; i < WallList.size(); i++)
 	{
 		if (CharList.size() > 1)
@@ -236,6 +262,9 @@ void world(sf::RenderWindow &win)
 				BallList[i].V = -BallList[i].V;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -250,6 +279,9 @@ void world(sf::RenderWindow &win)
 				BallList[i].V = -BallList[i].V;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -264,6 +296,9 @@ void world(sf::RenderWindow &win)
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -278,6 +313,9 @@ void world(sf::RenderWindow &win)
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -288,14 +326,14 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[4].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
+				
 
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -306,16 +344,13 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[5].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-
-			
-=======
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-			BallList[i].U = -BallList[i].U;
+				
+				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -326,17 +361,13 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[6].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-
-			
-
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-
+				
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -347,18 +378,13 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[7].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-
 				
 				BallList[i].V = -BallList[i].V;
-
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-				BallList[i].U = -BallList[i].U;
-
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -369,17 +395,13 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[8].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-
 				
-
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-
 				BallList[i].U = -BallList[i].U;
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -390,18 +412,13 @@ void world(sf::RenderWindow &win)
 			}
 			if (WallList[9].mur.getGlobalBounds().intersects(BallList[i].ball.getGlobalBounds()))
 			{
-
 				
 				BallList[i].V = -BallList[i].V;
-
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y + 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x, BallList[i].ball.getPosition().y - 15));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x + 15, BallList[i].ball.getPosition().y));
-				BallList[i].ball.setPosition(Vector2f(BallList[i].ball.getPosition().x - 15, BallList[i].ball.getPosition().y));
-				BallList[i].U = -BallList[i].U;
-
 				if (BallList[i].BallLife == 1)
 				{
+					boumballon = true;
+					BallonBoom.setOrigin(25, 25);
+					BallonBoom.setPosition(BallList[i].ball.getPosition());
 					BallList.erase(BallList.begin() + i);
 					break;
 				}
@@ -423,9 +440,7 @@ void world(sf::RenderWindow &win)
 				{
 					if (BallList[i].spawned == false)
 					{
-
-						
-
+						printf("Hello");
 						
 						
 						
@@ -438,18 +453,13 @@ void world(sf::RenderWindow &win)
 						{
 							WinRound(win, 2);
 						}
-						
 
+						Destruction.play();
 						mort = true;
-
-
 						Pause = true;
 						RedWin = true;
 						EndGame = true;
 						CharList[0].visible = false; 
-
-						
-
 						break;
 					}
 				}
@@ -469,10 +479,8 @@ void world(sf::RenderWindow &win)
 						{
 							WinRound(win, 1);
 						}
-
-						
+						Destruction.play();
 						mort2 = true;
-
 						Pause = true;
 						BlueWin = true;
 						EndGame = true;
@@ -521,7 +529,6 @@ void drawBall(sf::RenderWindow &win)
 
 }
 
-
 void Reset(sf::RenderWindow &win)
 {
 	
@@ -545,22 +552,15 @@ void Reset(sf::RenderWindow &win)
 int main()
 {
 	sf::RectangleShape Map(Vector2f(1920, 1080));
-
-	window.setFramerateLimit(60);
 	
 	
-
-	/*sf::Vector2f vec(400, 400);
-	sf::RectangleShape Bordure(vec);
-	Bordure.setPosition(1920 / 2 - 200, 1080 / 2 - 200);*/
-
-
 	bool Shoot = false;
 	bool Shoot2 = false;
 	sf::Font * font = new sf::Font();
 	sf::Font * fontRound = new sf::Font();
 	sf::Font * FontScore = new sf::Font();
 	sf::Font * FontScore2 = new sf::Font();
+	
 
 	sf::Texture textureR;
 	sf::Texture textureViseurR;
@@ -568,33 +568,26 @@ int main()
 	sf::Texture textureBall;
 	sf::Texture textureBall2;
 	sf::Texture FootballAmericain;
-
-	Texture Explosion;
-
-
-
+	sf::Texture Explosion;
 	
+	
+	
+	sf::Music NFL;
 
 
 	if (!textureWall.loadFromFile("res/mur.jpg"))
 		printf("pas mur");
 	if (!texture.loadFromFile("res/tank sans canon.png"))
 		printf("pasTank");
-	if (!textureViseur.loadFromFile("res/canon sans tank.png"))
+	if (!textureViseur.loadFromFile("res/canon sans tank2.png"))
 		printf("pasTank");
-
 	if (!textureR.loadFromFile("res/tank sans canon2.png"))
 		printf("pasTank");
 	if (!textureViseurR.loadFromFile("res/canon sans tank2.png"))
-
-	if (!textureR.loadFromFile("res/tank sans canon rouge.png"))
 		printf("pasTank");
-	if (!textureViseurR.loadFromFile("res/canon tank rouge.png"))
-
-		printf("pasTank");
-	if (!textureBall.loadFromFile("res/fireball.png"))
+	if (!textureBall.loadFromFile("res/ballon2.png"))
 		printf("pas ball");
-	if (!textureBall2.loadFromFile("res/fireball2.png"))
+	if (!textureBall2.loadFromFile("res/ballon1.png"))
 		printf("pas ball");
 	if (font->loadFromFile("res/DOWNCOME.TTF") == false)
 		printf("no such font");
@@ -606,37 +599,41 @@ int main()
 		printf("no such font");
 	if (!FootballAmericain.loadFromFile("res/FootballAmericain.png"))
 		printf("pas de terrain");
-
-	/*if (!Explosion.loadFromFile("res/explosion.png"))
-		printf("pas BOUM");*/
-
-	Explosion.loadFromFile("res/explosion2.png");
-	Sprite Explo(Explosion);
-	float frame = 0;
-	float animspeed = 0.4;
-	int framecount = 20;
-
-	Map.setTexture(&FootballAmericain);
-	
-	
+	if (!Explosion.loadFromFile("res/explosion.png"))
+		printf("pas BOOM");
+	if(!ExploBallon.loadFromFile("res/exploballon.png"))
+	if (!Boom.loadFromFile("res/explosion.wav"))
+		printf("pas detruit");
+	if (!NFL.openFromFile("res/NFL.ogg"))
+		printf("pas NFL");
+	Destruction.setVolume(5);
+	Destruction.setPitch(1.2f);
+	Destruction.setBuffer(Boom);
+	NFL.setVolume(5);
+	NFL.setLoop(true);
+	NFL.play();
 	
 
 
 
 	Map.setTexture(&FootballAmericain);
 	//Bordure.setTexture(&textureWall);
-
+	Sprite Explo(Explosion);
+	
+	float frame = 0;
+	float animspeed = 0.5;
+	int framecount = 25;
+	
 	
 	VictoryText.setFont(*font);
 	VictoryRoundText.setFont(*fontRound);
 	NextRoundText.setFont(*fontRound);
+	MenuText.setFont(*fontRound);
 	
 	ScoreTextB.setFont(*FontScore);
 	ScoreTextR.setFont(*FontScore2);
 	Entity Player = Entity(Vector2f(150, 800), Vector2f(65, 65), &texture, &textureViseur);
 	Entity Ennemy = Entity(Vector2f(1600, 100), Vector2f(65, 65), &textureR, &textureViseurR);
-
-
 
 
 	CharList.push_back(Player);
@@ -673,7 +670,6 @@ int main()
 
 	window.setVerticalSyncEnabled(true);
 
-
 	while (window.isOpen())//on passe tout le temps DEBUT DE LA FRAME 
 	{
 		sf::Event event;//recup les evenement clavier/pad
@@ -695,7 +691,7 @@ int main()
 		world(window);
 	
 		
-		if (EndGame == true && sf::Joystick::isButtonPressed(0,1) && Pause==true)
+		if (EndGame == true && sf::Joystick::isButtonPressed(0,1) || sf::Joystick::isButtonPressed(1, 1) && Pause==true)
 		{
 			
 			EndGame = false;
@@ -734,7 +730,7 @@ int main()
 			}
 			if (ScoreBleu == 3 || ScoreRouge == 3)
 			{
-				
+				Menu(window);
 				ScoreBleu = 0;
 				ScoreRouge = 0;
 			}
@@ -745,28 +741,18 @@ int main()
 			VictoryText.setString("");
 			VictoryRoundText.setString("");
 			NextRoundText.setString("");
+			frame = 0;
 			Reset(window);
 		
 
 		}
-
 		
-		Explo.setScale(sf::Vector2f(10, 10));
-		Explo.setTextureRect(IntRect(int(frame) * 50, 0, 50, 50));
-		frame += animspeed;
-		Explo.setPosition(CharList[0].position.x - 50, CharList[0].position.y - 30);
-		window.draw(Explo);
-			
-			/*if (frame < framecount)
-			{
-
-				window.draw(Explo);
-			}*/
-		
-		
-		
-		
-
+		if (Pause == true && sf::Joystick::isButtonPressed(0, 7))
+		{
+			Pause = false;
+			menu = false;
+			MenuText.setString("");
+		}
 
 #pragma region Controls
 	
@@ -877,22 +863,25 @@ int main()
 					}
 					if (sf::Joystick::isConnected)
 					{
-
+						
 						float u = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 						float r = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
 						if (u > 25 || u < -25 || r>25 || r < -25)
 						{
 							float angle = (atan2(u, r) * 180) / 3.141592654;
 							CharList[0].Viseur.setRotation(-angle);
+							if (ballcad < 20) ballcad++;
 
 
-							if (!Shoot && sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
+							if (!Shoot && sf::Joystick::getAxisPosition(0, Joystick::Z) < -50 &&ballcad>=20)
 							{
 								Ball Balle = Ball(sf::Vector2f(CharList[0].Viseur.getPosition().x - 5, CharList[0].Viseur.getPosition().y), 15, &textureBall);
 								Balle.U = sf::Joystick::getAxisPosition(0, sf::Joystick::U);
 								Balle.V = sf::Joystick::getAxisPosition(0, sf::Joystick::V);
 								Balle.BallLife = 0;
 								BallList.push_back(Balle);
+								
+								ballcad = 0;
 							}
 							if (sf::Joystick::getAxisPosition(0, Joystick::Z) < -50)
 							{
@@ -914,14 +903,17 @@ int main()
 						{
 							float angle = (atan2(u, r) * 180) / 3.141592654;
 							CharList[1].Viseur.setRotation(-angle);
+							if (ballcad2<20) ballcad2++;
 
-							if (!Shoot2 && sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
+							if (!Shoot2 && sf::Joystick::getAxisPosition(1, Joystick::Z) < -50 && ballcad2>= 20)
 							{
 								Ball Balle = Ball(sf::Vector2f(CharList[1].Viseur.getPosition().x - 5, CharList[1].Viseur.getPosition().y), 15, &textureBall2);
 								Balle.U = sf::Joystick::getAxisPosition(1, sf::Joystick::U);
 								Balle.V = sf::Joystick::getAxisPosition(1, sf::Joystick::V);
 								Balle.BallLife = 0;
 								BallList.push_back(Balle);
+								
+								ballcad2 = 0;
 							}
 							if (sf::Joystick::getAxisPosition(1, Joystick::Z) < -50)
 							{
@@ -944,20 +936,59 @@ int main()
 		window.clear();
 
 		window.draw(Map);
+		
+		if (mort == true)
+		{
+			Explo.setScale(sf::Vector2f(1.5,1.5));
+			Explo.setTextureRect(IntRect(int(frame) * 40,0,35,35));
+			frame += animspeed;
+			Explo.setPosition(CharList[0].position);
+			if (frame < framecount)
+			{
+				window.draw(Explo);
+			}
+			mort = false;
+			if (frame == 25)
+				frame = 0;
+			
+		}
+		if (mort2 == true)
+		{
+			Explo.setScale(sf::Vector2f(1.5, 1.5));
+			Explo.setTextureRect(IntRect(int(frame) * 40, 0, 35, 35));
+			frame += animspeed;
+			Explo.setPosition(CharList[1].position);
+			if (frame < framecount)
+			{
+				window.draw(Explo);
+			}
+			mort2 = false;
+			if (frame == 25)
+				frame = 0;
 
-		
-		
-		window.draw(Explo);
-		drawBall(window);
-		drawMur(window);
-		drawTank(window);
-		
-		
+		}
+		if (boumballon == true)
+		{
+			
+			BallonBoom.setScale(sf::Vector2f(1.5, 1.5));
+			BallonBoom.setTextureRect(IntRect(int(frame) * 50,0,50,50));
+			frame += animspeed;
+			
+			if (frame < framecount)
+			{
+				window.draw(BallonBoom);
+			}
+			boumballon = false;
+			if (frame == 25)
+				frame = 0;
+
+		}
+	
 		//window.draw(Bordure);
 		drawBall(window);
 		drawMur(window);
 		drawTank(window);
-
+		window.draw(MenuText);
 		window.draw(ScoreTextB);
 		window.draw(ScoreTextR);
 		window.draw(VictoryText);
